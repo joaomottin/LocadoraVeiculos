@@ -1,0 +1,2 @@
+2025-05-24T11:45:50.001362200 - Alugado: Aluguel: João alugou Corolla de 2025-05-20 até 2025-05-24 | Valor: R$ 600.0
+2025-05-24T11:45:50.005352400 - Devolvido: Corolla

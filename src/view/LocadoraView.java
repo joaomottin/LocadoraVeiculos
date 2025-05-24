@@ -2,6 +2,15 @@ package view;
 
 import controller.MotoController;
 import controller.CarroController;
+import controller.ClienteController;
+import controller.FuncionarioController;
+import controller.AluguelController;
+import model.Cliente;
+import model.Funcionario;
+import model.Turno;
+import model.Veiculo;
+
+import java.time.LocalDate;
 
 public class LocadoraView {
     public static void main(String[] args) {
@@ -23,23 +32,39 @@ public class LocadoraView {
         cc.alugarCarro(1);
         cc.devolverCarro(1);
 
-        ClienteController cc = new ClienteController();
-        Cliente c1 = cc.adicionarCliente("João", "123.456.789-00", "11999999999", "joao@email.com", LocalDate.of(1990, 1, 15));
+        ClienteController clienteController = new ClienteController();
+        Cliente c1 = clienteController.adicionarCliente("João", "123.456.789-00", "11999999999", "joao@email.com", LocalDate.of(1990, 1, 15));
 
-        cc.listarClientes().forEach(System.out::println);
+        clienteController.listarClientes().forEach(System.out::println);
 
-        cc.aplicarMulta(c1.getId());
-        cc.removerMulta(c1.getId());
-        
+        clienteController.aplicarMulta(c1.getId());
+        clienteController.removerMulta(c1.getId());
+
         FuncionarioController fc = new FuncionarioController();
+        Turno t1 = Turno.MANHA;
 
-        Turno t1 = new Turno(1, "Manhã", "08:00", "12:00");
-        
         Funcionario f1 = fc.adicionarFuncionario("Ana", "123.456.789-00", "11999999999", "ana@email.com",
-
-        LocalDate.of(1990, 5, 10), t1, "Atendente", 2500.0, 0.05);
+            LocalDate.of(1990, 5, 10), t1, "Atendente", 2500.0, 0.05);
 
         fc.calcularComissao(f1.getId(), 10000).ifPresent(comissao -> System.out.println("Comissão: " + comissao));
 
+        AluguelController aluguelController = new AluguelController();
+
+        Veiculo veiculoParaAlugar = cc.buscarPorId(1).orElse(null);
+
+        if (veiculoParaAlugar != null) {
+            boolean sucesso = aluguelController.alugarVeiculo(c1, veiculoParaAlugar,
+                LocalDate.of(2025, 5, 20), LocalDate.of(2025, 5, 24));
+
+            if (sucesso) {
+                System.out.println("Aluguel registrado com sucesso!");
+            } else {
+                System.out.println("Não foi possível alugar o veículo.");
+            }
+
+            aluguelController.listarTodos().forEach(System.out::println);
+
+            aluguelController.devolverVeiculo(veiculoParaAlugar);
+        }
     }
 }

@@ -1,9 +1,10 @@
-import view.LocadoraView;
-
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println("Locadora De Veículos");
-
-        LocadoraView.main(args);
+        try {
+            LocadoraView.main(args);
+        } catch (Exception e) {
+            System.err.println("Erro inesperado na aplicação: " + e.getMessage());
+        }
     }
 }

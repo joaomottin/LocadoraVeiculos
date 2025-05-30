@@ -1,38 +1,79 @@
-
 package controller;
 
 import model.Moto;
-import util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class MotoController implements Gerenciavel<Moto> {
-    private final List<Moto> motos = new ArrayList<>();
-    private int ultimoId = 0;
+    private List<Moto> motos = new ArrayList<>();
+    private int nextId = 1;
 
-    public Moto cadastrar(String modelo, String placa, double precoDiaria, boolean bau) {
-        try {
-            Moto moto = new Moto(++ultimoId, modelo, placa, precoDiaria, bau);
-            motos.add(moto);
-            Log.registrar("Moto cadastrada: " + moto);
-            return moto;
-        } catch (Exception e) {
-            Log.registrar("Erro ao cadastrar moto: " + e.getMessage());
-            return null;
-        }
-    }
-
-    public Optional<Moto> buscarPorPlaca(String placa) {
-        return motos.stream()
-                .filter(m -> m.getPlaca().equals(placa))
-                .findFirst();
+    
+    @Override
+    public void cadastrar(Moto moto) {
+        moto.setId(nextId++);
+        motos.add(moto);
     }
 
     @Override
-    public List<Moto> listar() {
-        return motos.stream().collect(Collectors.toList());
+    public void listar() {
+        if (motos.isEmpty()) {
+            System.out.println("Nenhuma moto cadastrada.");
+            return;
+        }
+        motos.forEach(System.out::println);
+    }
+
+    @Override
+    public void atualizar(int id, Moto motoAtualizada) {
+        buscarPorId(id).ifPresentOrElse(
+            motoExistente -> {
+                motoAtualizada.setId(id);
+                motos.set(motos.indexOf(motoExistente), motoAtualizada);
+            },
+            () -> System.out.println("Moto não encontrada com ID: " + id)
+        );
+    }
+
+    @Override
+    public void remover(int id) {
+        motos.removeIf(m -> m.getId() == id);
+    }
+
+   
+    public Moto adicionarMoto(String marca, String modelo, int anoFabricacao, String placa, 
+                            double precoDiaria, boolean disponivel,
+                            int cilindradas, String tipoCarenagem) {
+        Moto moto = new Moto(nextId++, marca, modelo, anoFabricacao, placa, 
+                           precoDiaria, disponivel, cilindradas, tipoCarenagem);
+        motos.add(moto);
+        return moto;
+    }
+
+    public List<Moto> listarMotos() {
+        return new ArrayList<>(motos); 
+    }
+
+    public Optional<Moto> buscarPorId(int id) {
+        return motos.stream().filter(m -> m.getId() == id).findFirst();
+    }
+
+    public boolean alugarMoto(int id) {
+        Optional<Moto> motoOpt = buscarPorId(id);
+        if (motoOpt.isPresent() && motoOpt.get().isDisponivel()) {
+            motoOpt.get().setDisponivel(false);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean devolverMoto(int id) {
+        Optional<Moto> motoOpt = buscarPorId(id);
+        if (motoOpt.isPresent() && !motoOpt.get().isDisponivel()) {
+            motoOpt.get().setDisponivel(true);
+            return true;
+        }
+        return false;
     }
 }

@@ -41,50 +41,19 @@ public class CarroController implements Gerenciavel<Carro> {
         }
     }
 
-    public Carro adicionarCarro(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int numeroPortas, String tipoCombustivel) {
-        int id = GeradorID.getNextId();  
-        Carro carro = new Carro(id, marca, modelo, anoFabricacao, placa, precoDiaria, disponivel, numeroPortas, tipoCombustivel);
-        carros.add(carro);
-        salvar();
-        return carro;
-    }
-
-    public List<Carro> listarCarros() {
-        return new ArrayList<>(carros);
-    }
-
     public Optional<Carro> buscarPorId(int id) {
         return carros.stream()
                      .filter(c -> c.getId() == id)
                      .findFirst();
     }
 
-    public boolean alugarCarro(int id) {
-        Optional<Carro> carroOpt = buscarPorId(id);
-        if (carroOpt.isPresent() && carroOpt.get().isDisponivel()) {
-            carroOpt.get().setDisponivel(false);
-            salvar();
-            return true;
-        }
-        return false;
-    }
-
-    public boolean devolverCarro(int id) {
-        Optional<Carro> carroOpt = buscarPorId(id);
-        if (carroOpt.isPresent() && !carroOpt.get().isDisponivel()) {
-            carroOpt.get().setDisponivel(true);
-            salvar();
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void cadastrar(Carro carro) {
-        carro.setId(nextId++);
+        carro.setId(GeradorID.getNextId());
         carros.add(carro);
         salvar();
     }
+    
 
     @Override
     public void listar() {

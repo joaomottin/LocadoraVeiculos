@@ -49,8 +49,8 @@ public class LocadoraView {
             System.out.println("\n--- Menu Motos ---");
             System.out.println("1. Listar motos");
             System.out.println("2. Adicionar moto");
-            System.out.println("3. Alugar moto");
-            System.out.println("4. Devolver moto");
+            System.out.println("3. Modificar moto");
+            System.out.println("4. Remover moto");
             System.out.println("0. Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
@@ -59,15 +59,7 @@ public class LocadoraView {
             switch (opcao) {
                 case 1 -> {
                     System.out.println("\n--- Lista de Motos ---");
-                    List<Moto> listaMoto = new ArrayList<>();
-                    try {
-                        listaMoto = MotoController.carregar();
-                    }catch (IOException e) {
-                        System.err.println("Arquivo não encontrado " + e.getMessage());
-                    }catch (ClassNotFoundException e){
-                        System.err.println("Arquivo corrompido");
-                    }
-                    motoController.listarMotos().forEach(System.out::println);
+                    motoController.listar();
                 }
                 case 2 -> {
                     System.out.print("Marca: ");
@@ -91,28 +83,13 @@ public class LocadoraView {
                     System.out.print("Tipo de carenagem: ");
                     String carenagem = sc.nextLine();
 
-                    motoController.adicionarMoto(marca, modelo, ano, placa, preco, disponivel, cilindradas, carenagem);
+                    Moto novaMoto = new Moto(0, marca, modelo, ano, placa, preco, disponivel, cilindradas, carenagem);
+                    motoController.cadastrar(novaMoto);
                     System.out.println("Moto adicionada com sucesso!");
                 }
                 case 3 -> {
-                    System.out.print("ID da moto para alugar: ");
-                    int idAlugar = sc.nextInt();
-                    sc.nextLine();
-                    if (motoController.alugarMoto(idAlugar)) {
-                        System.out.println("Moto alugada com sucesso!");
-                    } else {
-                        System.out.println("Falha ao alugar moto. Verifique se a moto está disponível.");
-                    }
                 }
                 case 4 -> {
-                    System.out.print("ID da moto para devolver: ");
-                    int idDevolver = sc.nextInt();
-                    sc.nextLine();
-                    if (motoController.devolverMoto(idDevolver)) {
-                        System.out.println("Moto devolvida com sucesso!");
-                    } else {
-                        System.out.println("Falha ao devolver moto. Verifique o ID e o status da moto.");
-                    }
                 }
                 case 0 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção inválida.");
@@ -127,8 +104,8 @@ public class LocadoraView {
             System.out.println("\n--- Menu Carros ---");
             System.out.println("1. Listar carros");
             System.out.println("2. Adicionar carro");
-            System.out.println("3. Alugar carro");
-            System.out.println("4. Devolver carro");
+            System.out.println("3. Modificar carro");
+            System.out.println("4. Remover carro");
             System.out.println("0. Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
@@ -137,15 +114,7 @@ public class LocadoraView {
             switch (opcao) {
                 case 1 -> {
                     System.out.println("\n--- Lista de Carros ---");
-                    List<Carro> listaCarro = new ArrayList<>();
-                    try {
-                        listaCarro = CarroController.carregar();
-                    } catch (IOException e) {
-                        System.err.println("Arquivo não encontrado: " + e.getMessage());
-                    } catch (ClassNotFoundException e) {
-                        System.err.println("Arquivo corrompido");
-                    }
-                    carroController.listarCarros().forEach(System.out::println);
+                    carroController.listar();
                 }
                 case 2 -> {
                     System.out.print("Marca: ");
@@ -169,28 +138,14 @@ public class LocadoraView {
                     System.out.print("Tipo de combustível: ");
                     String combustivel = sc.nextLine();
 
-                    carroController.adicionarCarro(marca, modelo, ano, placa, preco, disponivel, portas, combustivel);
+                    Carro novoCarro = new Carro(0, marca, modelo, ano, placa, preco, disponivel, portas, combustivel);
+                    carroController.cadastrar(novoCarro);
                     System.out.println("Carro adicionado com sucesso!");
+
                 }
                 case 3 -> {
-                    System.out.print("ID do carro para alugar: ");
-                    int idAlugar = sc.nextInt();
-                    sc.nextLine();
-                    if (carroController.alugarCarro(idAlugar)) {
-                        System.out.println("Carro alugado com sucesso!");
-                    } else {
-                        System.out.println("Falha ao alugar carro. Verifique se o carro está disponível.");
-                    }
                 }
                 case 4 -> {
-                    System.out.print("ID do carro para devolver: ");
-                    int idDevolver = sc.nextInt();
-                    sc.nextLine();
-                    if (carroController.devolverCarro(idDevolver)) {
-                        System.out.println("Carro devolvido com sucesso!");
-                    } else {
-                        System.out.println("Falha ao devolver carro. Verifique o ID e o status do carro.");
-                    }
                 }
                 case 0 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção inválida.");

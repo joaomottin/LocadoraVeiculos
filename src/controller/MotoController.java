@@ -49,39 +49,15 @@ public class MotoController implements Gerenciavel<Moto> {
         return moto;
     }
 
-    public List<Moto> listarMotos() {
-        return new ArrayList<>(motos);
-    }
-
     public Optional<Moto> buscarPorId(int id) {
         return motos.stream()
                     .filter(m -> m.getId() == id)
                     .findFirst();
     }
 
-    public boolean alugarMoto(int id) {
-        Optional<Moto> motoOpt = buscarPorId(id);
-        if (motoOpt.isPresent() && motoOpt.get().isDisponivel()) {
-            motoOpt.get().setDisponivel(false);
-            salvar();
-            return true;
-        }
-        return false;
-    }
-
-    public boolean devolverMoto(int id) {
-        Optional<Moto> motoOpt = buscarPorId(id);
-        if (motoOpt.isPresent() && !motoOpt.get().isDisponivel()) {
-            motoOpt.get().setDisponivel(true);
-            salvar();
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void cadastrar(Moto moto) {
-        moto.setId(nextId++);
+        moto.setId(GeradorID.getNextId());
         motos.add(moto);
         salvar();
     }

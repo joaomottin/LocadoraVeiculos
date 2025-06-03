@@ -14,13 +14,21 @@ public final class Cliente extends Pessoa{
         this.possuiMulta = false;
     }
 
-    public List<Veiculo> getVeiculosAlugados() {return veiculosAlugados;}
-    public void setVeiculosAlugados(List<Veiculo> veiculosAlugados) {this.veiculosAlugados = veiculosAlugados;}
+    public List<Veiculo> getVeiculosAlugados() {
+        return veiculosAlugados;
+    }
+    public void setVeiculosAlugados(List<Veiculo> veiculosAlugados) {
+        this.veiculosAlugados = veiculosAlugados;
+    }
     
     public boolean isPossuiMulta() {return possuiMulta;}
 
-    public void aplicarMulta() {this.possuiMulta = true;}
-    public void removerMulta() {this.possuiMulta = false;}
+    public void aplicarMulta() {
+        this.possuiMulta = true;
+    }
+    public void removerMulta() {
+        this.possuiMulta = false;
+    }
 
 
     @Override

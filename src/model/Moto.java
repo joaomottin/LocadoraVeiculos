@@ -1,6 +1,8 @@
 package model;
 
-public final class Moto extends Veiculo {
+import java.io.Serializable;
+
+public final class Moto extends Veiculo implements Serializable{
     private int cilindradas;
     private String tipoCarenagem;
 
@@ -12,11 +14,19 @@ public final class Moto extends Veiculo {
         this.tipoCarenagem = tipoCarenagem;
     }
 
-    public int getCilindradas() { return cilindradas; }
-    public void setCilindradas(int cilindradas) { this.cilindradas = cilindradas; }
+    public int getCilindradas() {
+        return cilindradas; 
+    }
+    public void setCilindradas(int cilindradas) { 
+        this.cilindradas = cilindradas; 
+    }
 
-    public String getTipoCarenagem() { return tipoCarenagem; }
-    public void setTipoCarenagem(String tipoCarenagem) { this.tipoCarenagem = tipoCarenagem; }
+    public String getTipoCarenagem() {
+        return tipoCarenagem; 
+    }
+    public void setTipoCarenagem(String tipoCarenagem) { 
+        this.tipoCarenagem = tipoCarenagem; 
+    }
 
     @Override
     public String tipoVeiculo() {

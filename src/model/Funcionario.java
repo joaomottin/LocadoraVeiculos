@@ -20,17 +20,33 @@ public final class Funcionario extends Pessoa{
         return valorVenda * comissao;
     }
 
-    public Turno getTurno() {return turno;}
-    public void setTurno(Turno turno) {this.turno = turno;}
+    public Turno getTurno() {
+        return turno;
+    }
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
     
-    public String getCargo() {return cargo;}
-    public void setCargo(String cargo) {this.cargo = cargo;}
+    public String getCargo() {
+        return cargo;
+    }
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 
-    public double getSalario() {return salario;}
-    public void setSalario(double salario) {this.salario = salario;}
+    public double getSalario() {
+        return salario;
+    }
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
 
-    public double getComissao() {return comissao;}
-    public void setComissao(double comissao) {this.comissao = comissao;}
+    public double getComissao() {
+        return comissao;
+    }
+    public void setComissao(double comissao) {
+        this.comissao = comissao;
+    }
 
     @Override
     public String toString() {

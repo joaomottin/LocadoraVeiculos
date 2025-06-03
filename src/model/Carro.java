@@ -1,6 +1,9 @@
 package model;
 
-public final class Carro extends Veiculo {
+import java.io.Serializable;
+
+public final class Carro extends Veiculo implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int numeroPortas;
     private String tipoCombustivel;
 
@@ -12,11 +15,19 @@ public final class Carro extends Veiculo {
         this.tipoCombustivel = tipoCombustivel;
     }
 
-    public int getNumeroPortas() { return numeroPortas; }
-    public void setNumeroPortas(int numeroPortas) { this.numeroPortas = numeroPortas; }
+    public int getNumeroPortas() {
+        return numeroPortas; 
+    }
+    public void setNumeroPortas(int numeroPortas) {
+        this.numeroPortas = numeroPortas;
+    }
 
-    public String getTipoCombustivel() { return tipoCombustivel; }
-    public void setTipoCombustivel(String tipoCombustivel) { this.tipoCombustivel = tipoCombustivel; }
+    public String getTipoCombustivel() {
+        return tipoCombustivel; 
+    }
+    public void setTipoCombustivel(String tipoCombustivel) {
+        this.tipoCombustivel = tipoCombustivel; 
+    }
 
     @Override
     public String tipoVeiculo() {
@@ -25,6 +36,14 @@ public final class Carro extends Veiculo {
 
     @Override
     public String toString() {
-        return super.toString() + " - Portas: " + numeroPortas + " - Combustível: " + tipoCombustivel;
+        return "ID: " + getId() +
+               " - Marca: " + getMarca() +
+               " - Modelo: " + getModelo() +
+               " - Ano: " + getAnoFabricacao() +
+               " - Placa: " + getPlaca() +
+               " - Preço/Diária: R$" + getPrecoDiaria() +
+               " - Disponível: " + (isDisponivel() ? "Sim" : "Não") +
+               " - Portas: " + numeroPortas +
+               " - Combustível: " + tipoCombustivel;
     }
 }

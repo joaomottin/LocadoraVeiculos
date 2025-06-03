@@ -1,3 +1,5 @@
+//Ademir José Wilsek Scarpim - RGM 37063758; Carlos Eduardo Stroparo Magaton - RGM 38350912; Iago Mayer Bach - RGM 36899691; João Pedro Mezzadri Mottin - RGM 36946346.
+
 import view.LocadoraView;
 
 public class App {

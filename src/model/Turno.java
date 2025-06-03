@@ -7,9 +7,13 @@ public enum Turno {
 
     private final String horario;
 
-    Turno(String horario) {this.horario = horario;}
+    Turno(String horario) {
+        this.horario = horario;
+    }
 
-    public String getHorario() {return horario;}
+    public String getHorario() {
+        return horario;
+    }
 
     @Override
     public String toString() {

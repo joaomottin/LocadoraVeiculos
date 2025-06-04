@@ -12,7 +12,7 @@ import java.util.List;
 import model.Carro;
 
 public abstract class CarroDAO {
-    private static final String CAMINHO = "src/dados/moto";
+    private static final String CAMINHO = "src/dados";
 
     public static void salvar(List<Carro> carros) throws IOException {
         File diretorio = new File(CAMINHO);

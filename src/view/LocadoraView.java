@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class LocadoraView {
@@ -87,9 +88,53 @@ public class LocadoraView {
                     motoController.cadastrar(novaMoto);
                     System.out.println("Moto adicionada com sucesso!");
                 }
-                case 3 -> {
+                case 3 -> { 
+                    System.out.print("ID da moto a modificar: ");
+                    int idMod = sc.nextInt();
+                    sc.nextLine();
+
+                    Optional<Moto> optMoto = motoController.buscarPorId(idMod);
+                    if (optMoto.isEmpty()) {
+                        System.out.println("Moto não encontrada com ID: " + idMod);
+                    } else {
+                        System.out.print("Nova marca: ");
+                        String marcaAtualizada = sc.nextLine();
+                        System.out.print("Novo modelo: ");
+                        String modeloAtualizado = sc.nextLine();
+                        System.out.print("Novo ano de fabricação: ");
+                        int anoAtualizado = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Nova placa: ");
+                        String placaAtualizada = sc.nextLine();
+                        System.out.print("Novo preço diária: ");
+                        double precoAtualizado = sc.nextDouble();
+                        sc.nextLine();
+                        System.out.print("Disponível (true/false): ");
+                        boolean disponivelAtualizado = sc.nextBoolean();
+                        sc.nextLine();
+                        System.out.print("Novas cilindradas: ");
+                        int cilindradasAtualizado = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Novo tipo de carenagem: ");
+                        String carenagemAtualizado = sc.nextLine();
+
+                        Moto motoAtualizada = new Moto(0, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, cilindradasAtualizado, carenagemAtualizado);
+                        motoController.atualizar(idMod, motoAtualizada);
+                        System.out.println("Moto atualizada com sucesso!");
+                    }
                 }
                 case 4 -> {
+                    System.out.print("ID da moto a remover: ");
+                    int idRem = sc.nextInt();
+                    sc.nextLine();
+
+                    Optional<Moto> optMotoRem = motoController.buscarPorId(idRem);
+                    if (optMotoRem.isEmpty()) {
+                        System.out.println("Moto não encontrada com ID: " + idRem);
+                    } else {
+                        motoController.remover(idRem);
+                        System.out.println("Moto removida com sucesso!");
+                    }
                 }
                 case 0 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção inválida.");
@@ -144,8 +189,52 @@ public class LocadoraView {
 
                 }
                 case 3 -> {
+                    System.out.print("ID do carro a modificar: ");
+                    int idMod = sc.nextInt();
+                    sc.nextLine();
+
+                    Optional<Carro> optCarro = carroController.buscarPorId(idMod);
+                    if (optCarro.isEmpty()) {
+                        System.out.println("Carro não encontrado com ID: " + idMod);
+                    } else {
+                        System.out.print("Nova marca: ");
+                        String marcaAtualizada = sc.nextLine();
+                        System.out.print("Novo modelo: ");
+                        String modeloAtualizado = sc.nextLine();
+                        System.out.print("Novo ano de fabricação: ");
+                        int anoAtualizado = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Nova placa: ");
+                        String placaAtualizada = sc.nextLine();
+                        System.out.print("Novo preço diária: ");
+                        double precoAtualizado = sc.nextDouble();
+                        sc.nextLine();
+                        System.out.print("Disponível (true/false): ");
+                        boolean disponivelAtualizado = sc.nextBoolean();
+                        sc.nextLine();
+                        System.out.print("Novo número de portas: ");
+                        int portasAtualizado = sc.nextInt();
+                        sc.nextLine();
+                        System.out.print("Novo tipo de combustível: ");
+                        String combustivelAtualizado = sc.nextLine();
+
+                        Carro carroAtualizado = new Carro(0, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, portasAtualizado, combustivelAtualizado);
+                        carroController.atualizar(idMod, carroAtualizado);
+                        System.out.println("Carro atualizado com sucesso!");
+                    }
                 }
                 case 4 -> {
+                    System.out.print("ID do carro a remover: ");
+                    int idRem = sc.nextInt();
+                    sc.nextLine();
+
+                    Optional<Carro> optCarroRem = carroController.buscarPorId(idRem);
+                    if (optCarroRem.isEmpty()) {
+                        System.out.println("Carro não encontrado com ID: " + idRem);
+                    } else {
+                        carroController.remover(idRem);
+                        System.out.println("Carro removido com sucesso!");
+                    }
                 }
                 case 0 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção inválida.");

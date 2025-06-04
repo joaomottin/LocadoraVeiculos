@@ -84,7 +84,7 @@ public class LocadoraView {
                     System.out.print("Tipo de carenagem: ");
                     String carenagem = sc.nextLine();
 
-                    Moto novaMoto = new Moto(0, marca, modelo, ano, placa, preco, disponivel, cilindradas, carenagem);
+                    Moto novaMoto = new Moto(marca, modelo, ano, placa, preco, disponivel, cilindradas, carenagem);
                     motoController.cadastrar(novaMoto);
                     System.out.println("Moto adicionada com sucesso!");
                 }
@@ -118,7 +118,7 @@ public class LocadoraView {
                         System.out.print("Novo tipo de carenagem: ");
                         String carenagemAtualizado = sc.nextLine();
 
-                        Moto motoAtualizada = new Moto(0, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, cilindradasAtualizado, carenagemAtualizado);
+                        Moto motoAtualizada = new Moto(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, cilindradasAtualizado, carenagemAtualizado);
                         motoController.atualizar(idMod, motoAtualizada);
                         System.out.println("Moto atualizada com sucesso!");
                     }
@@ -183,10 +183,9 @@ public class LocadoraView {
                     System.out.print("Tipo de combustível: ");
                     String combustivel = sc.nextLine();
 
-                    Carro novoCarro = new Carro(0, marca, modelo, ano, placa, preco, disponivel, portas, combustivel);
+                    Carro novoCarro = new Carro(marca, modelo, ano, placa, preco, disponivel, portas, combustivel);
                     carroController.cadastrar(novoCarro);
                     System.out.println("Carro adicionado com sucesso!");
-
                 }
                 case 3 -> {
                     System.out.print("ID do carro a modificar: ");
@@ -218,7 +217,7 @@ public class LocadoraView {
                         System.out.print("Novo tipo de combustível: ");
                         String combustivelAtualizado = sc.nextLine();
 
-                        Carro carroAtualizado = new Carro(0, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, portasAtualizado, combustivelAtualizado);
+                        Carro carroAtualizado = new Carro(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, portasAtualizado, combustivelAtualizado);
                         carroController.atualizar(idMod, carroAtualizado);
                         System.out.println("Carro atualizado com sucesso!");
                     }

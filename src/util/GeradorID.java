@@ -1,15 +1,25 @@
 package util;
 
 public class GeradorID {
-    private static int nextId = 1;
+    private static int nextIdPessoa = 1;
+    private static int nextIdVeiculo = 1;
 
-    public static int getNextId() {
-        return nextId++;
+    public static int getNextIdPessoa() {
+        return nextIdPessoa++;
     }
 
-    public static void setNextId(int id) {
-        if (id >= nextId) {
-            nextId = id + 1;
+    public static void setNextIdPessoa(int id) {
+        if (id >= nextIdPessoa) {
+            nextIdPessoa = id + 1;
+        }
+    }
+    public static int getNextIdVeiculo() {
+        return nextIdVeiculo++;
+    }
+
+    public static void setNextIdVeiculo(int id) {
+        if (id >= nextIdVeiculo) {
+            nextIdVeiculo = id + 1;
         }
     }
 }

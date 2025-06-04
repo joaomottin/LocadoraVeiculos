@@ -6,10 +6,8 @@ public final class Moto extends Veiculo implements Serializable{
     private int cilindradas;
     private String tipoCarenagem;
 
-    public Moto(int id, String marca, String modelo, int anoFabricacao, String placa,
-                double precoDiaria, boolean disponivel,
-                int cilindradas, String tipoCarenagem) {
-        super(id, marca, modelo, anoFabricacao, placa, precoDiaria, disponivel);
+    public Moto(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, String tipoCarenagem) {
+        super(marca, modelo, anoFabricacao, placa, precoDiaria, disponivel);
         this.cilindradas = cilindradas;
         this.tipoCarenagem = tipoCarenagem;
     }

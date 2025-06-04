@@ -21,7 +21,7 @@ public class MotoController implements Gerenciavel<Moto> {
                               .mapToInt(Moto::getId)
                               .max()
                               .orElse(0);
-            GeradorID.setNextId(maiorId);
+            GeradorID.setNextIdVeiculo(maiorId);
         } catch (IOException | ClassNotFoundException e) {
             motos = new ArrayList<>();
             System.out.println("Arquivo motos.ser não encontrado ou corrompido.");
@@ -49,7 +49,6 @@ public class MotoController implements Gerenciavel<Moto> {
 
     @Override
     public void cadastrar(Moto moto) {
-        moto.setId(GeradorID.getNextId());
         motos.add(moto);
         salvar();
     }
@@ -67,7 +66,6 @@ public class MotoController implements Gerenciavel<Moto> {
     public void atualizar(int id, Moto motoAtualizada) {
         buscarPorId(id).ifPresentOrElse(
             motoExistente -> {
-                motoAtualizada.setId(id);
                 motos.set(motos.indexOf(motoExistente), motoAtualizada);
                 salvar();
             },

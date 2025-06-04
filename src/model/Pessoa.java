@@ -3,14 +3,15 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import util.GeradorID;
+
 public abstract class Pessoa implements Serializable{
-    protected static int contadorID=1;
     protected int id;
     protected String nome, cpf, telefone, email;
     protected LocalDate dataNascimento;
 
     public Pessoa(int id, String nome, String cpf, String telefone, String email, LocalDate dataNascimento) {
-        this.id = contadorID++;
+        this.id = GeradorID.getNextIdPessoa();
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;

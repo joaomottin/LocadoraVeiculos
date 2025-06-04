@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import util.GeradorID;
+
 public abstract class Veiculo implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -13,8 +15,8 @@ public abstract class Veiculo implements Serializable {
     private double precoDiaria;
     private boolean disponivel;
 
-    public Veiculo(int id, String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel) {
-        this.id = id;
+    public Veiculo(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel) {
+        this.id = GeradorID.getNextIdVeiculo();
         this.marca = marca;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
@@ -25,9 +27,6 @@ public abstract class Veiculo implements Serializable {
 
     public int getId() {
         return id;
-    }
-    public void setId(int id) {
-        this.id = id; 
     }
 
     public String getMarca() {

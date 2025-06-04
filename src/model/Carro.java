@@ -7,10 +7,8 @@ public final class Carro extends Veiculo implements Serializable{
     private int numeroPortas;
     private String tipoCombustivel;
 
-    public Carro(int id, String marca, String modelo, int anoFabricacao, String placa,
-                 double precoDiaria, boolean disponivel,
-                 int numeroPortas, String tipoCombustivel) {
-        super(id, marca, modelo, anoFabricacao, placa, precoDiaria, disponivel);
+    public Carro(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int numeroPortas, String tipoCombustivel) {
+        super(marca, modelo, anoFabricacao, placa, precoDiaria, disponivel);
         this.numeroPortas = numeroPortas;
         this.tipoCombustivel = tipoCombustivel;
     }

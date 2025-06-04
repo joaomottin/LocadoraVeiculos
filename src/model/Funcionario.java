@@ -51,6 +51,6 @@ public final class Funcionario extends Pessoa implements Serializable{
 
     @Override
     public String toString() {
-        return getNome() + " - " + cargo + " (" + turno + ")";
+        return "ID = " + getId() + " | " + getNome() + " - " + cargo + " (" + turno + ")";
     }
 }

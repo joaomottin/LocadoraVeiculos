@@ -248,9 +248,8 @@ public class LocadoraView {
             System.out.println("\n--- Menu Clientes ---");
             System.out.println("1. Listar clientes");
             System.out.println("2. Adicionar cliente");
-            System.out.println("3. Ver cliente por ID");
-            System.out.println("4. Aplicar multa");
-            System.out.println("5. Remover multa");
+            System.out.println("3. Aplicar multa");
+            System.out.println("4. Remover multa");
             System.out.println("0. Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
@@ -283,17 +282,6 @@ public class LocadoraView {
                     System.out.println("Cliente adicionado com ID: " + novo.getId());
                 }
                 case 3 -> {
-                    System.out.print("ID do cliente: ");
-                    int id = sc.nextInt();
-                    sc.nextLine();
-                    Optional<Cliente> cliente = clienteController.buscarPorId(id);
-                    if (cliente.isPresent()) {
-                        System.out.println(cliente.get());
-                    } else {
-                        System.out.println("Cliente não encontrado.");
-                    }
-                }
-                case 4 -> {
                     System.out.print("ID do cliente para aplicar multa: ");
                     int id = sc.nextInt();
                     sc.nextLine();
@@ -303,7 +291,7 @@ public class LocadoraView {
                         System.out.println("Cliente não encontrado.");
                     }
                 }
-                case 5 -> {
+                case 4 -> {
                     System.out.print("ID do cliente para remover multa: ");
                     int id = sc.nextInt();
                     sc.nextLine();

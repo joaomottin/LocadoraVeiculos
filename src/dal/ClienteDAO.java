@@ -6,7 +6,7 @@ import java.util.List;
 import model.Cliente;
 
 public abstract class ClienteDAO {
-    private static final String CAMINHO = "src/dados/cliente";
+    private static final String CAMINHO = "src/dados";
 
     public static void salvar(List<Cliente> clientes) throws IOException {
         File diretorio = new File(CAMINHO);

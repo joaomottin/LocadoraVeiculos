@@ -1,20 +1,54 @@
 package controller;
 
+import model.Carro;
 import model.Funcionario;
 import model.Turno;
+import util.GeradorID;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import dal.FuncionarioDAO;
+
 public class FuncionarioController {
     private List<Funcionario> funcionarios = new ArrayList<>();
     private int nextId = 1;
 
+    public FuncionarioController() {
+        try {
+            funcionarios = FuncionarioDAO.carregar();
+            System.out.println("Funcionarios carregados: " + funcionarios.size());
+            int maiorId = funcionarios.stream()
+                              .mapToInt(Funcionario::getId)
+                              .max()
+                              .orElse(0);
+            GeradorID.setNextIdVeiculo(maiorId);
+        } catch (IOException | ClassNotFoundException e) {
+            funcionarios = new ArrayList<>();
+            System.out.println("Arquivo funcionarios.ser não encontrado ou corrompido.");
+            nextId = 1;
+        }
+    }
+
+    public static List<Funcionario> carregar() throws IOException, ClassNotFoundException {
+        return FuncionarioDAO.carregar();
+    }
+
+    private void salvar() {
+        try {
+            FuncionarioDAO.salvar(funcionarios);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar carros: " + e.getMessage());
+        }
+    }
+
     public Funcionario adicionarFuncionario(String nome, String cpf, String telefone, String email, LocalDate dataNascimento, Turno turno, String cargo, double salario, double comissao) {
         Funcionario funcionario = new Funcionario(nextId++, nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
         funcionarios.add(funcionario);
+        salvar();
         return funcionario;
     }
 

@@ -244,15 +244,156 @@ public class LocadoraView {
 
 
     private static void menuClientes() {
-        System.out.println("\n--- Clientes ---");
-        clienteController.listarClientes().forEach(System.out::println);
-        // Ex: adicionar cliente, aplicar multa, etc.
+        int opcao;
+        do {
+            System.out.println("\n--- Menu Clientes ---");
+            System.out.println("1. Listar clientes");
+            System.out.println("2. Adicionar cliente");
+            System.out.println("3. Ver cliente por ID");
+            System.out.println("4. Aplicar multa");
+            System.out.println("5. Remover multa");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha uma opção: ");
+            opcao = sc.nextInt();
+            sc.nextLine();
+        
+            switch (opcao) {
+                case 1 -> {
+                    List<Cliente> clientes = clienteController.listarClientes();
+                    if (clientes.isEmpty()) {
+                        System.out.println("Nenhum cliente cadastrado.");
+                    } else {
+                        for (Cliente c : clientes) {
+                            System.out.println(c);
+                        }
+                    }
+                }
+                case 2 -> {
+                    System.out.print("Nome: ");
+                    String nome = sc.nextLine();
+                    System.out.print("CPF: ");
+                    String cpf = sc.nextLine();
+                    System.out.print("Telefone: ");
+                    String telefone = sc.nextLine();
+                    System.out.print("Email: ");
+                    String email = sc.nextLine();
+                    System.out.print("Data de nascimento (AAAA-MM-DD): ");
+                    LocalDate nascimento = LocalDate.parse(sc.nextLine());
+                
+                    Cliente novo = clienteController.adicionarCliente(nome, cpf, telefone, email, nascimento);
+                    System.out.println("Cliente adicionado com ID: " + novo.getId());
+                }
+                case 3 -> {
+                    System.out.print("ID do cliente: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    Optional<Cliente> cliente = clienteController.buscarPorId(id);
+                    if (cliente.isPresent()) {
+                        System.out.println(cliente.get());
+                    } else {
+                        System.out.println("Cliente não encontrado.");
+                    }
+                }
+                case 4 -> {
+                    System.out.print("ID do cliente para aplicar multa: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    if (clienteController.aplicarMulta(id)) {
+                        System.out.println("Multa aplicada com sucesso.");
+                    } else {
+                        System.out.println("Cliente não encontrado.");
+                    }
+                }
+                case 5 -> {
+                    System.out.print("ID do cliente para remover multa: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    if (clienteController.removerMulta(id)) {
+                        System.out.println("Multa removida com sucesso.");
+                    } else {
+                        System.out.println("Cliente não encontrado.");
+                    }
+                }
+                case 0 -> System.out.println("Voltando ao menu principal...");
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
     }
 
+
     private static void menuFuncionarios() {
-        System.out.println("\n--- Funcionários ---");
-        funcionarioController.listarFuncionarios().forEach(System.out::println);
-        // Ex: cadastrar, calcular comissão, etc.
+        int opcao;
+        do {
+            System.out.println("\n--- Menu Funcionários ---");
+            System.out.println("1. Listar funcionários");
+            System.out.println("2. Adicionar funcionário");
+            System.out.println("3. Atualizar turno");
+            System.out.println("4. Atualizar salário");
+            System.out.println("0. Voltar");
+            System.out.print("Escolha uma opção: ");
+            opcao = sc.nextInt();
+            sc.nextLine();
+        
+            switch (opcao) {
+                case 1 -> {
+                    System.out.println("\n--- Lista de Funcionários ---");
+                    funcionarioController.listarFuncionarios().forEach(System.out::println);
+                }
+                case 2 -> {
+                    System.out.print("Nome: ");
+                    String nome = sc.nextLine();
+                    System.out.print("CPF: ");
+                    String cpf = sc.nextLine();
+                    System.out.print("Telefone: ");
+                    String telefone = sc.nextLine();
+                    System.out.print("Email: ");
+                    String email = sc.nextLine();
+                    System.out.print("Data de nascimento (yyyy-mm-dd): ");
+                    String dataNascStr = sc.nextLine();
+                    LocalDate dataNascimento = LocalDate.parse(dataNascStr);
+                    System.out.print("Turno (MANHA, TARDE, NOITE): ");
+                    Turno turno = Turno.valueOf(sc.nextLine().toUpperCase());
+                    System.out.print("Cargo: ");
+                    String cargo = sc.nextLine();
+                    System.out.print("Salário: ");
+                    double salario = sc.nextDouble();
+                    System.out.print("Comissão: ");
+                    double comissao = sc.nextDouble();
+                    sc.nextLine();
+                
+                    funcionarioController.adicionarFuncionario(nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
+                    System.out.println("Funcionário adicionado com sucesso!");
+                }
+                case 3 -> {
+                    System.out.print("ID do funcionário para atualizar turno: ");
+                    int idTurno = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Novo turno (MANHA, TARDE, NOITE): ");
+                    Turno novoTurno = Turno.valueOf(sc.nextLine().toUpperCase());
+                
+                    if (funcionarioController.atualizarTurno(idTurno, novoTurno)) {
+                        System.out.println("Turno atualizado com sucesso!");
+                    } else {
+                        System.out.println("Funcionário não encontrado.");
+                    }
+                }
+                case 4 -> {
+                    System.out.print("ID do funcionário para atualizar salário: ");
+                    int idSalario = sc.nextInt();
+                    System.out.print("Novo salário: ");
+                    double novoSalario = sc.nextDouble();
+                    sc.nextLine();
+                
+                    if (funcionarioController.atualizarSalario(idSalario, novoSalario)) {
+                        System.out.println("Salário atualizado com sucesso!");
+                    } else {
+                        System.out.println("Funcionário não encontrado.");
+                    }
+                }
+                case 0 -> System.out.println("Voltando ao menu principal...");
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (opcao != 0);
     }
 
     private static void menuAluguel() {

@@ -12,11 +12,8 @@ public class FuncionarioController {
     private List<Funcionario> funcionarios = new ArrayList<>();
     private int nextId = 1;
 
-    public Funcionario adicionarFuncionario(String nome, String cpf, String telefone, String email,
-                                            LocalDate dataNascimento, Turno turno, String cargo,
-                                            double salario, double comissao) {
-        Funcionario funcionario = new Funcionario(nextId++, nome, cpf, telefone, email, dataNascimento,
-                                                  turno, cargo, salario, comissao);
+    public Funcionario adicionarFuncionario(String nome, String cpf, String telefone, String email, LocalDate dataNascimento, Turno turno, String cargo, double salario, double comissao) {
+        Funcionario funcionario = new Funcionario(nextId++, nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
         funcionarios.add(funcionario);
         return funcionario;
     }

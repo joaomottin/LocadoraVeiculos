@@ -5,4 +5,4 @@ public interface Gerenciavel<T> {
     void listar();
     void atualizar(int id, T obj);
     void remover(int id);
-}
+}  

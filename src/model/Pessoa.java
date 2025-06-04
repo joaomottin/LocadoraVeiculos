@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
     protected static int contadorID=1;
     protected int id;
     protected String nome, cpf, telefone, email;

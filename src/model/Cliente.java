@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public final class Cliente extends Pessoa{
+public final class Cliente extends Pessoa implements Serializable{
     private List<Veiculo> veiculosAlugados;
     private boolean possuiMulta;
     

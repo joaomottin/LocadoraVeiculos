@@ -41,14 +41,6 @@ public class MotoController implements Gerenciavel<Moto> {
         }
     }
 
-    public Moto adicionarMoto(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, String tipoCarenagem) {
-        int id = GeradorID.getNextId();
-        Moto moto = new Moto(id, marca, modelo, anoFabricacao, placa, precoDiaria, disponivel, cilindradas, tipoCarenagem);
-        motos.add(moto);
-        salvar();
-        return moto;
-    }
-
     public Optional<Moto> buscarPorId(int id) {
         return motos.stream()
                     .filter(m -> m.getId() == id)

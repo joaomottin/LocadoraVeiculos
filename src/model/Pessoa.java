@@ -60,9 +60,6 @@ public abstract class Pessoa implements Serializable{
 
     @Override
     public String toString() {
-    return "ID: " + id + 
-           "\nNome: " + nome + 
-           "\nCPF: " + cpf + 
-           "\nTelefone: " + telefone;
+    return "ID: " + id + "\nNome: " + nome + "\nCPF: " + cpf + "\nTelefone: " + telefone;
     }
 }

@@ -34,7 +34,6 @@ public final class Cliente extends Pessoa implements Serializable{
 
     @Override
     public String toString() {
-        return getNome() + " - Multa: " + (possuiMulta ? "Sim" : "Não") 
-               + " - Veículos alugados: " + (veiculosAlugados != null ? veiculosAlugados.size() : 0);
+        return "ID = " + getId() + " | " + getNome() + " - Multa: " + (possuiMulta ? "Sim" : "Não") + " - Veículos alugados: " + (veiculosAlugados != null ? veiculosAlugados.size() : 0);
     }
 }

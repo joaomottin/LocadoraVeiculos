@@ -5,6 +5,7 @@ import model.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -75,16 +76,13 @@ public class LocadoraView {
                     System.out.print("Preço diária: ");
                     double preco = sc.nextDouble();
                     sc.nextLine();
-                    System.out.print("Disponível (true/false): ");
-                    boolean disponivel = sc.nextBoolean();
-                    sc.nextLine();
                     System.out.print("Cilindradas: ");
                     int cilindradas = sc.nextInt();
                     sc.nextLine();
                     System.out.print("Tipo de carenagem: ");
                     String carenagem = sc.nextLine();
 
-                    Moto novaMoto = new Moto(marca, modelo, ano, placa, preco, disponivel, cilindradas, carenagem);
+                    Moto novaMoto = new Moto(marca, modelo, ano, placa, preco, true, cilindradas, carenagem);
                     motoController.cadastrar(novaMoto);
                     System.out.println("Moto adicionada com sucesso!");
                 }
@@ -109,16 +107,13 @@ public class LocadoraView {
                         System.out.print("Novo preço diária: ");
                         double precoAtualizado = sc.nextDouble();
                         sc.nextLine();
-                        System.out.print("Disponível (true/false): ");
-                        boolean disponivelAtualizado = sc.nextBoolean();
-                        sc.nextLine();
                         System.out.print("Novas cilindradas: ");
                         int cilindradasAtualizado = sc.nextInt();
                         sc.nextLine();
                         System.out.print("Novo tipo de carenagem: ");
                         String carenagemAtualizado = sc.nextLine();
 
-                        Moto motoAtualizada = new Moto(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, cilindradasAtualizado, carenagemAtualizado);
+                        Moto motoAtualizada = new Moto(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, true, cilindradasAtualizado, carenagemAtualizado);
                         motoController.atualizar(idMod, motoAtualizada);
                         System.out.println("Moto atualizada com sucesso!");
                     }
@@ -174,16 +169,13 @@ public class LocadoraView {
                     System.out.print("Preço diária: ");
                     double preco = sc.nextDouble();
                     sc.nextLine();
-                    System.out.print("Disponível (true/false): ");
-                    boolean disponivel = sc.nextBoolean();
-                    sc.nextLine();
                     System.out.print("Número de portas: ");
                     int portas = sc.nextInt();
                     sc.nextLine();
                     System.out.print("Tipo de combustível: ");
                     String combustivel = sc.nextLine();
 
-                    Carro novoCarro = new Carro(marca, modelo, ano, placa, preco, disponivel, portas, combustivel);
+                    Carro novoCarro = new Carro(marca, modelo, ano, placa, preco, true, portas, combustivel);
                     carroController.cadastrar(novoCarro);
                     System.out.println("Carro adicionado com sucesso!");
                 }
@@ -208,16 +200,13 @@ public class LocadoraView {
                         System.out.print("Novo preço diária: ");
                         double precoAtualizado = sc.nextDouble();
                         sc.nextLine();
-                        System.out.print("Disponível (true/false): ");
-                        boolean disponivelAtualizado = sc.nextBoolean();
-                        sc.nextLine();
                         System.out.print("Novo número de portas: ");
                         int portasAtualizado = sc.nextInt();
                         sc.nextLine();
                         System.out.print("Novo tipo de combustível: ");
                         String combustivelAtualizado = sc.nextLine();
 
-                        Carro carroAtualizado = new Carro(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, disponivelAtualizado, portasAtualizado, combustivelAtualizado);
+                        Carro carroAtualizado = new Carro(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, true, portasAtualizado, combustivelAtualizado);
                         carroController.atualizar(idMod, carroAtualizado);
                         System.out.println("Carro atualizado com sucesso!");
                     }
@@ -344,7 +333,7 @@ public class LocadoraView {
                     String cargo = sc.nextLine();
                     System.out.print("Salário: ");
                     double salario = sc.nextDouble();
-                    System.out.print("Comissão: ");
+                    System.out.print("Comissão: (0%-20%)");
                     double comissao = sc.nextDouble();
                     sc.nextLine();
                 
@@ -384,8 +373,194 @@ public class LocadoraView {
     }
 
     private static void menuAluguel() {
-        System.out.println("\n--- Aluguel de Veículos ---");
-        aluguelController.listarTodos().forEach(System.out::println);
-        // Ex: alugar, devolver, ver histórico
-    }
+    int opcao;
+    do {
+        System.out.println("\n--- Menu Aluguel ---");
+        System.out.println("1. Mostrar aluguéis ativos");
+        System.out.println("2. Listar todos os aluguéis");
+        System.out.println("3. Adicionar aluguel");
+        System.out.println("4. Alterar aluguel");
+        System.out.println("5. Remover aluguel");
+        System.out.println("6. Mostrar salário e comissão dos funcionários");
+        System.out.println("0. Voltar");
+        System.out.print("Escolha uma opção: ");
+        opcao = sc.nextInt();
+        sc.nextLine();
+
+        switch (opcao) {
+            case 1 -> {
+                List<Aluguel> ativos = aluguelController.listarAtivos();
+                if (ativos.isEmpty()) {
+                    System.out.println("Nenhum aluguel ativo.");
+                } else {
+                    System.out.println("--- Aluguéis Ativos ---");
+                    ativos.forEach(System.out::println);
+                }
+            }
+            case 2 -> {
+                List<Aluguel> todos = aluguelController.listarTodos();
+                if (todos.isEmpty()) {
+                    System.out.println("Nenhum aluguel cadastrado.");
+                } else {
+                    System.out.println("--- Todos os Aluguéis ---");
+                    todos.forEach(System.out::println);
+                }
+            }
+            case 3 -> {
+                System.out.print("ID do cliente (deve estar cadastrado): ");
+                List<Cliente> clientes = clienteController.listarClientes();
+                    if (clientes.isEmpty()) {
+                        System.out.println("\nNenhum cliente cadastrado.");
+                    } else {
+                        for (Cliente c : clientes) {
+                            System.out.println("\n" + c);
+                        }
+                    }
+                int clienteId = sc.nextInt();
+                sc.nextLine();
+                Optional<Cliente> clienteOpt = clienteController.buscarPorId(clienteId);
+                if (clienteOpt.isEmpty()) {
+                    System.out.println("Cliente não encontrado.");
+                    break;
+                }
+                Cliente cliente = clienteOpt.get();
+
+                System.out.print("Tipo de veículo (moto/carro): ");
+                String tipoVeiculo = sc.nextLine().toLowerCase();
+
+                Veiculo veiculo = null;
+                if (tipoVeiculo.equals("moto")) {
+                    motoController.listar();
+                    System.out.print("ID da moto para alugar: ");
+                    int motoId = sc.nextInt();
+                    sc.nextLine();
+                    Optional<Moto> motoOpt = motoController.buscarPorId(motoId);
+                    if (motoOpt.isEmpty()) {
+                        System.out.println("Moto não encontrada.");
+                        break;
+                    }
+                    veiculo = motoOpt.get();
+                } else if (tipoVeiculo.equals("carro")) {
+                    carroController.listar();
+                    System.out.print("ID do carro para alugar: ");
+                    int carroId = sc.nextInt();
+                    sc.nextLine();
+                    Optional<Carro> carroOpt = carroController.buscarPorId(carroId);
+                    if (carroOpt.isEmpty()) {
+                        System.out.println("Carro não encontrado.");
+                        break;
+                    }
+                    veiculo = carroOpt.get();
+                } else {
+                    System.out.println("Tipo de veículo inválido.");
+                    break;
+                }
+
+                System.out.print("ID do funcionário responsável: ");
+                funcionarioController.listarFuncionarios().forEach(System.out::println);
+                int funcionarioId = sc.nextInt();
+                sc.nextLine();
+                Optional<Funcionario> funcionarioOpt = funcionarioController.buscarPorId(funcionarioId);
+                if (funcionarioOpt.isEmpty()) {
+                    System.out.println("Funcionário não encontrado.");
+                    break;
+                }
+                Funcionario funcionario = funcionarioOpt.get();
+
+                System.out.print("Data início (AAAA-MM-DD): ");
+                LocalDate dataInicio = LocalDate.parse(sc.nextLine());
+                System.out.print("Data fim (AAAA-MM-DD): ");
+                LocalDate dataFim = LocalDate.parse(sc.nextLine());
+
+                boolean sucesso = aluguelController.alugarVeiculo(cliente, veiculo, funcionario, dataInicio, dataFim);
+                if (sucesso) {
+                    System.out.println("Aluguel cadastrado com sucesso!");
+                } else {
+                    System.out.println("Falha ao cadastrar aluguel (veículo pode estar indisponível).");
+                }
+            }
+            case 4 -> {
+                System.out.print("ID do aluguel a alterar: ");
+                int aluguelId = sc.nextInt();
+                sc.nextLine();
+                Optional<Aluguel> aluguelOpt = aluguelController.listarTodos().stream()
+                        .filter(a -> a.getId() == aluguelId)
+                        .findFirst();
+                if (aluguelOpt.isEmpty()) {
+                    System.out.println("Aluguel não encontrado.");
+                    break;
+                }
+                Aluguel aluguel = aluguelOpt.get();
+
+                System.out.print("Novo tipo de veículo (moto/carro): ");
+                String tipoVeiculo = sc.nextLine().toLowerCase();
+
+                Veiculo novoVeiculo = null;
+                if (tipoVeiculo.equals("moto")) {
+                    motoController.listar();
+                    System.out.print("ID da nova moto: ");
+                    int motoId = sc.nextInt();
+                    sc.nextLine();
+                    Optional<Moto> motoOpt = motoController.buscarPorId(motoId);
+                    if (motoOpt.isEmpty()) {
+                        System.out.println("Moto não encontrada.");
+                        break;
+                    }
+                    novoVeiculo = motoOpt.get();
+                } else if (tipoVeiculo.equals("carro")) {
+                    carroController.listar();
+                    System.out.print("ID do novo carro: ");
+                    int carroId = sc.nextInt();
+                    sc.nextLine();
+                    Optional<Carro> carroOpt = carroController.buscarPorId(carroId);
+                    if (carroOpt.isEmpty()) {
+                        System.out.println("Carro não encontrado.");
+                        break;
+                    }
+                    novoVeiculo = carroOpt.get();
+                } else {
+                    System.out.println("Tipo de veículo inválido.");
+                    break;
+                }
+
+                if (!novoVeiculo.isDisponivel()) {
+                    System.out.println("Veículo indisponível.");
+                    break;
+                }
+
+                aluguel.getVeiculo().setDisponivel(true);
+
+                aluguel.setVeiculo(novoVeiculo);
+                novoVeiculo.setDisponivel(false);
+
+                long dias = ChronoUnit.DAYS.between(aluguel.getDataInicio(), aluguel.getDataFim());
+                double novoValor = dias * novoVeiculo.getPrecoDiaria();
+                aluguel.setValorTotal(novoValor);
+
+                System.out.println("Aluguel atualizado com novo veículo com sucesso!");
+            }
+            case 5 -> {
+                System.out.print("ID do aluguel a remover: ");
+                int aluguelId = sc.nextInt();
+                sc.nextLine();
+                aluguelController.remover(aluguelId);
+                System.out.println("Aluguel removido (se encontrado).");
+            }
+            case 6 -> {
+                List<Funcionario> funcionarios = funcionarioController.listarFuncionarios();
+                if (funcionarios.isEmpty()) {
+                    System.out.println("Nenhum funcionário cadastrado.");
+                } else {
+                    System.out.println("--- Funcionários e suas remunerações ---");
+                    for (Funcionario f : funcionarios) {
+                        aluguelController.exibirSalarioEComissao(f);
+                    }
+                }
+            }
+            case 0 -> System.out.println("Voltando ao menu principal...");
+            default -> System.out.println("Opção inválida.");
+        }
+    } while (opcao != 0);
+}
+
 }

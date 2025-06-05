@@ -18,7 +18,7 @@ public final class Funcionario extends Pessoa implements Serializable{
     }
 
     public double calcularComissao(double valorVenda) {
-        return valorVenda * comissao;
+        return valorVenda * (1 + comissao / 100.0);
     }
 
     public Turno getTurno() {

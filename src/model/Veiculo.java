@@ -75,8 +75,7 @@ public abstract class Veiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "ID: " + id + " - " + marca + " " + modelo + " (" + anoFabricacao + ") - Placa: " + placa +
-               " - R$" + precoDiaria + "/dia - " + (disponivel ? "Disponível" : "Alugado");
+        return "ID: " + id + " - " + marca + " " + modelo + " (" + anoFabricacao + ") - Placa: " + placa + " - R$" + precoDiaria + "/dia - " + (disponivel ? "Disponível" : "Alugado");
     }
 
 }

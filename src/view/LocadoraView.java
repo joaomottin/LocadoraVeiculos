@@ -562,5 +562,4 @@ public class LocadoraView {
         }
     } while (opcao != 0);
 }
-
 }

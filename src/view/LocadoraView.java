@@ -314,7 +314,6 @@ public class LocadoraView {
             } while (opcao != 0);
         }
     
-    
         private static void menuFuncionarios() {
             int opcao;
             do {

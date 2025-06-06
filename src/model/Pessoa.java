@@ -6,11 +6,11 @@ import java.time.LocalDate;
 import util.GeradorID;
 
 public abstract class Pessoa implements Serializable{
-    protected int id;
-    protected String nome, cpf, telefone, email;
-    protected LocalDate dataNascimento;
+    private final int id;
+    private String nome, cpf, telefone, email;
+    private LocalDate dataNascimento;
 
-    public Pessoa(int id, String nome, String cpf, String telefone, String email, LocalDate dataNascimento) {
+    public Pessoa(String nome, String cpf, String telefone, String email, LocalDate dataNascimento) {
         this.id = GeradorID.getNextIdPessoa();
         this.nome = nome;
         this.cpf = cpf;
@@ -60,9 +60,6 @@ public abstract class Pessoa implements Serializable{
 
     @Override
     public String toString() {
-    return "ID: " + id + 
-           "\nNome: " + nome + 
-           "\nCPF: " + cpf + 
-           "\nTelefone: " + telefone;
+    return "ID: " + id + "\nNome: " + nome + "\nCPF: " + cpf + "\nTelefone: " + telefone;
     }
 }

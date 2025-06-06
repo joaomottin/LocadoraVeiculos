@@ -2,3 +2,4 @@
 2025-05-24T11:45:50.005352400 - Devolvido: Corolla
 2025-06-02T19:19:04.974003500 - Alugado: Aluguel [ID: 1] João alugou Corolla de 2025-05-20 até 2025-05-24 | Valor: R$ 600,00
 2025-06-02T19:19:04.975507 - Devolvido: Corolla
+2025-06-04T20:42:34.407089600 - Alugado: Aluguel [ID: 1] Marcos alugou R15 de 2025-07-10 até 2025-07-20 | Valor: R$ 500,00 | Funcionário: Andre Silva

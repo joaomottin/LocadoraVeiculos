@@ -34,14 +34,6 @@ public final class Carro extends Veiculo implements Serializable{
 
     @Override
     public String toString() {
-        return "ID: " + getId() +
-               " - Marca: " + getMarca() +
-               " - Modelo: " + getModelo() +
-               " - Ano: " + getAnoFabricacao() +
-               " - Placa: " + getPlaca() +
-               " - Preço/Diária: R$" + getPrecoDiaria() +
-               " - Disponível: " + (isDisponivel() ? "Sim" : "Não") +
-               " - Portas: " + numeroPortas +
-               " - Combustível: " + tipoCombustivel;
+        return "ID: " + getId() + " - Marca: " + getMarca() + " - Modelo: " + getModelo() + " - Ano: " + getAnoFabricacao() + " - Placa: " + getPlaca() + " - Preço/Diária: R$" + getPrecoDiaria() + " - Disponível: " + (isDisponivel() ? "Sim" : "Não") + " - Portas: " + numeroPortas + " - Combustível: " + tipoCombustivel;
     }
 }

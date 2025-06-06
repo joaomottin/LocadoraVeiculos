@@ -8,9 +8,9 @@ public final class Funcionario extends Pessoa implements Serializable{
     private String cargo;
     private double salario, comissao;
 
-    public Funcionario(int id, String nome, String cpf, String telefone, String email, LocalDate dataNascimento,
+    public Funcionario(String nome, String cpf, String telefone, String email, LocalDate dataNascimento,
             Turno turno, String cargo, double salario, double comissao) {
-        super(id, nome, cpf, telefone, email, dataNascimento);
+        super(nome, cpf, telefone, email, dataNascimento);
         this.turno = turno;
         this.cargo = cargo;
         this.salario = salario;
@@ -18,7 +18,7 @@ public final class Funcionario extends Pessoa implements Serializable{
     }
 
     public double calcularComissao(double valorVenda) {
-        return valorVenda * comissao;
+        return valorVenda * (1 + comissao / 100.0);
     }
 
     public Turno getTurno() {
@@ -51,6 +51,6 @@ public final class Funcionario extends Pessoa implements Serializable{
 
     @Override
     public String toString() {
-        return "ID = " + getId() + " | " + getNome() + " - " + cargo + " (" + turno + ")";
+        return "ID = " + getId() + " | " + getNome() + " - " + cargo + " (" + turno + ") - Salário R$" + String.format("%.2f", salario);
     }
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import dal.CarroDAO;
+import factory.CarroFactory;
 import model.Carro;
 import util.GeradorID;
 
@@ -11,7 +12,6 @@ import java.util.Optional;
 
 public class CarroController implements Gerenciavel<Carro> {
     private List<Carro> carros;
-    private int nextId = 1;
 
     public CarroController() {
         try {
@@ -25,7 +25,6 @@ public class CarroController implements Gerenciavel<Carro> {
         } catch (IOException | ClassNotFoundException e) {
             carros = new ArrayList<>();
             System.out.println("Arquivo carros.ser não encontrado ou corrompido.");
-            nextId = 1;
         }
     }
 
@@ -45,6 +44,11 @@ public class CarroController implements Gerenciavel<Carro> {
         return carros.stream()
                      .filter(c -> c.getId() == id)
                      .findFirst();
+    }
+
+    public void cadastrarComFactory(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int numeroPortas, String tipoCombustivel) throws Exception {
+        Carro carro = CarroFactory.criarCarro(marca, modelo, anoFabricacao, placa, precoDiaria, disponivel, numeroPortas, tipoCombustivel);
+        cadastrar(carro);
     }
 
     @Override
@@ -73,6 +77,29 @@ public class CarroController implements Gerenciavel<Carro> {
             () -> System.out.println("Carro não encontrado com ID: " + id)
         );
     }
+
+    public void atualizar(int id, String marca, String modelo, int anoFabricacao, String placa,
+                          double precoDiaria, int numeroPortas, String tipoCombustivel) throws Exception {
+
+        Optional<Carro> optCarro = buscarPorId(id);
+        if (optCarro.isEmpty()) {
+            throw new Exception("Carro não encontrado com ID: " + id);
+        }
+
+        CarroFactory.criarCarro(marca, modelo, anoFabricacao, placa, precoDiaria, true, numeroPortas, tipoCombustivel);
+
+        Carro carro = optCarro.get();
+        carro.setMarca(marca);
+        carro.setModelo(modelo);
+        carro.setAnoFabricacao(anoFabricacao);
+        carro.setPlaca(placa);
+        carro.setPrecoDiaria(precoDiaria);
+        carro.setNumeroPortas(numeroPortas);
+        carro.setTipoCombustivel(tipoCombustivel);
+
+        salvar();
+    }
+
 
     @Override
     public void remover(int id) {

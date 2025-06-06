@@ -3,10 +3,8 @@ package view;
 import controller.*;
 import model.*;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -78,44 +76,55 @@ public class LocadoraView {
                         int cilindradas = sc.nextInt();
                         sc.nextLine();
                         System.out.print("Tipo de carenagem: ");
-                        String carenagem = sc.nextLine();
+                        String tipoCarenagem = sc.nextLine();
                     
-                        Moto novaMoto = new Moto(marca, modelo, ano, placa, preco, true, cilindradas, carenagem);
-                        motoController.cadastrar(novaMoto);
-                        System.out.println("Moto adicionada com sucesso!");
+                        try {
+                            motoController.cadastrarComFactory(marca, modelo, ano, placa, preco, true, cilindradas, tipoCarenagem);
+                            System.out.println("Moto adicionada com sucesso!");
+                        } catch (Exception e) {
+                            System.out.println("Erro(s) ao adicionar moto: " + e.getMessage());
+                        }
+
                     }
                     case 3 -> { 
                         System.out.print("ID da moto a modificar: ");
                         int idMod = sc.nextInt();
                         sc.nextLine();
-                    
+                                        
                         Optional<Moto> optMoto = motoController.buscarPorId(idMod);
                         if (optMoto.isEmpty()) {
                             System.out.println("Moto não encontrada com ID: " + idMod);
                         } else {
-                            System.out.print("Nova marca: ");
-                            String marcaAtualizada = sc.nextLine();
-                            System.out.print("Novo modelo: ");
-                            String modeloAtualizado = sc.nextLine();
-                            System.out.print("Novo ano de fabricação: ");
-                            int anoAtualizado = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Nova placa: ");
-                            String placaAtualizada = sc.nextLine();
-                            System.out.print("Novo preço diária: ");
-                            double precoAtualizado = sc.nextDouble();
-                            sc.nextLine();
-                            System.out.print("Novas cilindradas: ");
-                            int cilindradasAtualizado = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Novo tipo de carenagem: ");
-                            String carenagemAtualizado = sc.nextLine();
-                        
-                            Moto motoAtualizada = new Moto(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, true, cilindradasAtualizado, carenagemAtualizado);
-                            motoController.atualizar(idMod, motoAtualizada);
-                            System.out.println("Moto atualizada com sucesso!");
+                            try {
+                                System.out.print("Nova marca: ");
+                                String marcaAtualizada = sc.nextLine();
+                                System.out.print("Novo modelo: ");
+                                String modeloAtualizado = sc.nextLine();
+                                System.out.print("Novo ano de fabricação: ");
+                                int anoAtualizado = sc.nextInt();
+                                sc.nextLine();
+                                System.out.print("Nova placa: ");
+                                String placaAtualizada = sc.nextLine();
+                                System.out.print("Novo preço diária: ");
+                                double precoAtualizado = sc.nextDouble();
+                                sc.nextLine();
+                                System.out.print("Novas cilindradas: ");
+                                int cilindradasAtualizado = sc.nextInt();
+                                sc.nextLine();
+                                System.out.print("Novo tipo de carenagem: ");
+                                String carenagemAtualizada = sc.nextLine();
+                            
+                                // ✅ Chama o método que já valida os dados
+                                motoController.atualizar(idMod, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada,
+                                                         precoAtualizado, cilindradasAtualizado, carenagemAtualizada);
+                            
+                                System.out.println("Moto atualizada com sucesso!");
+                            } catch (Exception e) {
+                                System.out.println("Erro ao atualizar moto: " + e.getMessage());
+                            }
                         }
                     }
+
                     case 4 -> {
                         System.out.print("ID da moto a remover: ");
                         int idRem = sc.nextInt();
@@ -134,8 +143,7 @@ public class LocadoraView {
                 }
             } while (opcao != 0);
         }
-    
-    
+        
         private static void menuCarros() {
             int opcao;
             do {
@@ -173,40 +181,48 @@ public class LocadoraView {
                         System.out.print("Tipo de combustível: ");
                         String combustivel = sc.nextLine();
                     
-                        Carro novoCarro = new Carro(marca, modelo, ano, placa, preco, true, portas, combustivel);
-                        carroController.cadastrar(novoCarro);
-                        System.out.println("Carro adicionado com sucesso!");
+                        try {
+                            carroController.cadastrarComFactory(marca, modelo, ano, placa, preco, true, portas, combustivel);
+                            System.out.println("Carro adicionado com sucesso!");
+                        } catch (Exception e) {
+                            System.out.println("Erro(s) ao adicionar carro: " + e.getMessage());
+                        }
+
                     }
                     case 3 -> {
                         System.out.print("ID do carro a modificar: ");
                         int idMod = sc.nextInt();
                         sc.nextLine();
-                    
+
                         Optional<Carro> optCarro = carroController.buscarPorId(idMod);
                         if (optCarro.isEmpty()) {
                             System.out.println("Carro não encontrado com ID: " + idMod);
                         } else {
-                            System.out.print("Nova marca: ");
-                            String marcaAtualizada = sc.nextLine();
-                            System.out.print("Novo modelo: ");
-                            String modeloAtualizado = sc.nextLine();
-                            System.out.print("Novo ano de fabricação: ");
-                            int anoAtualizado = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Nova placa: ");
-                            String placaAtualizada = sc.nextLine();
-                            System.out.print("Novo preço diária: ");
-                            double precoAtualizado = sc.nextDouble();
-                            sc.nextLine();
-                            System.out.print("Novo número de portas: ");
-                            int portasAtualizado = sc.nextInt();
-                            sc.nextLine();
-                            System.out.print("Novo tipo de combustível: ");
-                            String combustivelAtualizado = sc.nextLine();
-                        
-                            Carro carroAtualizado = new Carro(marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, true, portasAtualizado, combustivelAtualizado);
-                            carroController.atualizar(idMod, carroAtualizado);
-                            System.out.println("Carro atualizado com sucesso!");
+                            try {
+                                System.out.print("Nova marca: ");
+                                String marcaAtualizada = sc.nextLine();
+                                System.out.print("Novo modelo: ");
+                                String modeloAtualizado = sc.nextLine();
+                                System.out.print("Novo ano de fabricação: ");
+                                int anoAtualizado = sc.nextInt();
+                                sc.nextLine();
+                                System.out.print("Nova placa: ");
+                                String placaAtualizada = sc.nextLine();
+                                System.out.print("Novo preço diária: ");
+                                double precoAtualizado = sc.nextDouble();
+                                sc.nextLine();
+                                System.out.print("Novo número de portas: ");
+                                int portasAtualizado = sc.nextInt();
+                                sc.nextLine();
+                                System.out.print("Novo tipo de combustível: ");
+                                String combustivelAtualizado = sc.nextLine();
+                            
+                                carroController.atualizar(idMod, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, portasAtualizado, combustivelAtualizado);
+                            
+                                System.out.println("Carro atualizado com sucesso!");
+                            } catch (Exception e) {
+                                System.out.println("Erro ao atualizar carro: " + e.getMessage());
+                            }
                         }
                     }
                     case 4 -> {
@@ -265,8 +281,12 @@ public class LocadoraView {
                         System.out.print("Data de nascimento (AAAA-MM-DD): ");
                         LocalDate nascimento = LocalDate.parse(sc.nextLine());
                     
-                        Cliente novo = clienteController.adicionarCliente(nome, cpf, telefone, email, nascimento);
-                        System.out.println("Cliente adicionado com ID: " + novo.getId());
+                        try {
+                            clienteController.cadastrarComFactory(nome, cpf, telefone, email, nascimento);
+                            System.out.println("Cliente adicionado com sucesso!");
+                        } catch (Exception e) {
+                            System.out.println("Erro ao adicionar cliente: " + e.getMessage());
+                        }
                     }
                     case 3 -> {
                         System.out.print("ID do cliente para aplicar multa: ");
@@ -335,8 +355,12 @@ public class LocadoraView {
                         double comissao = sc.nextDouble();
                         sc.nextLine();
                     
-                        funcionarioController.adicionarFuncionario(nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
-                        System.out.println("Funcionário adicionado com sucesso!");
+                        try {
+                            funcionarioController.cadastrarComFactory(nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
+                            System.out.println("Funcionário adicionado com sucesso!");
+                        } catch (Exception e) {
+                            System.out.println("Erro ao adicionar funcionário: " + e.getMessage());
+                        }
                     }
                     case 3 -> {
                         System.out.print("ID do funcionário para atualizar turno: ");
@@ -357,13 +381,18 @@ public class LocadoraView {
                         System.out.print("Novo salário: ");
                         double novoSalario = sc.nextDouble();
                         sc.nextLine();
-                    
-                        if (funcionarioController.atualizarSalario(idSalario, novoSalario)) {
-                            System.out.println("Salário atualizado com sucesso!");
+
+                        if (novoSalario <= 1500) {
+                            System.out.println("Salário inválido. Sem escravidão por aqui...");
                         } else {
-                            System.out.println("Funcionário não encontrado.");
+                            if (funcionarioController.atualizarSalario(idSalario, novoSalario)) {
+                                System.out.println("Salário atualizado com sucesso!");
+                            } else {
+                                System.out.println("Funcionário não encontrado.");
+                            }
                         }
                     }
+
                     case 0 -> System.out.println("Voltando ao menu principal...");
                     default -> System.out.println("Opção inválida.");
                 }

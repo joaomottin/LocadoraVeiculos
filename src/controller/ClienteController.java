@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 import dal.ClienteDAO;
+import factory.ClienteFactory;
 
 public class ClienteController {
     private List<Cliente> clientes = new ArrayList<>();
-    private int nextId = 1;
 
     public ClienteController() {
         try {
@@ -25,11 +25,10 @@ public class ClienteController {
                               .mapToInt(Cliente::getId)
                               .max()
                               .orElse(0);
-            GeradorID.setNextIdVeiculo(maiorId);
+            GeradorID.setNextIdPessoa(maiorId);
         } catch (IOException | ClassNotFoundException e) {
             clientes = new ArrayList<>();
             System.out.println("Arquivo clientes.ser não encontrado ou corrompido.");
-            nextId = 1;
         }
     }
 
@@ -41,16 +40,17 @@ public class ClienteController {
         try {
             ClienteDAO.salvar(clientes);
         } catch (IOException e) {
-            System.out.println("Erro ao salvar carros: " + e.getMessage());
+            System.out.println("Erro ao salvar clientes: " + e.getMessage());
         }
     }
 
-    public Cliente adicionarCliente(String nome, String cpf, String telefone, String email, LocalDate dataNascimento) {
-        Cliente cliente = new Cliente(nextId++, nome, cpf, telefone, email, dataNascimento, new ArrayList<>(), false);
+    public Cliente cadastrarComFactory(String nome, String cpf, String telefone, String email, LocalDate dataNascimento) throws Exception {
+        Cliente cliente = ClienteFactory.criarCliente(nome, cpf, telefone, email, dataNascimento);
         clientes.add(cliente);
         salvar();
         return cliente;
     }
+
 
     public List<Cliente> listarClientes() {
         return clientes;

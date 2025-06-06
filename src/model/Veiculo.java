@@ -7,7 +7,7 @@ import util.GeradorID;
 public abstract class Veiculo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    private final int id;
     private String marca;
     private String modelo;
     private int anoFabricacao;

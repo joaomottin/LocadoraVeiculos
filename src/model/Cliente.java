@@ -1,10 +1,9 @@
 package model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public final class Cliente extends Pessoa implements Serializable{
+public final class Cliente extends Pessoa{
     private List<Veiculo> veiculosAlugados;
     private boolean possuiMulta;
     
@@ -22,7 +21,9 @@ public final class Cliente extends Pessoa implements Serializable{
         this.veiculosAlugados = veiculosAlugados;
     }
     
-    public boolean isPossuiMulta() {return possuiMulta;}
+    public boolean isPossuiMulta() {
+        return possuiMulta;
+    }
 
     public void aplicarMulta() {
         this.possuiMulta = true;

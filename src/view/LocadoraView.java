@@ -57,7 +57,12 @@ public class LocadoraView {
                 switch (opcao) {
                     case 1 -> {
                         System.out.println("\n--- Lista de Motos ---");
-                        motoController.listar();
+                        try {
+                            List<String> lista = motoController.listar();
+                            lista.forEach(System.out::println);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                     case 2 -> {
                         System.out.print("Marca: ");
@@ -79,7 +84,7 @@ public class LocadoraView {
                         String tipoCarenagem = sc.nextLine();
                     
                         try {
-                            motoController.cadastrarComFactory(marca, modelo, ano, placa, preco, true, cilindradas, tipoCarenagem);
+                            motoController.cadastrar(marca, modelo, ano, placa, preco, true, cilindradas, tipoCarenagem);
                             System.out.println("Moto adicionada com sucesso!");
                         } catch (Exception e) {
                             System.out.println("Erro(s) ao adicionar moto: " + e.getMessage());
@@ -114,9 +119,7 @@ public class LocadoraView {
                                 System.out.print("Novo tipo de carenagem: ");
                                 String carenagemAtualizada = sc.nextLine();
                             
-                                // ✅ Chama o método que já valida os dados
-                                motoController.atualizar(idMod, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada,
-                                                         precoAtualizado, cilindradasAtualizado, carenagemAtualizada);
+                                motoController.atualizar(idMod, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, cilindradasAtualizado, carenagemAtualizada);
                             
                                 System.out.println("Moto atualizada com sucesso!");
                             } catch (Exception e) {
@@ -160,7 +163,12 @@ public class LocadoraView {
                 switch (opcao) {
                     case 1 -> {
                         System.out.println("\n--- Lista de Carros ---");
-                        carroController.listar();
+                        try {
+                            List<String> lista = carroController.listar();
+                            lista.forEach(System.out::println);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                     case 2 -> {
                         System.out.print("Marca: ");
@@ -182,7 +190,7 @@ public class LocadoraView {
                         String combustivel = sc.nextLine();
                     
                         try {
-                            carroController.cadastrarComFactory(marca, modelo, ano, placa, preco, true, portas, combustivel);
+                            carroController.cadastrar(marca, modelo, ano, placa, preco, true, portas, combustivel);
                             System.out.println("Carro adicionado com sucesso!");
                         } catch (Exception e) {
                             System.out.println("Erro(s) ao adicionar carro: " + e.getMessage());
@@ -282,7 +290,7 @@ public class LocadoraView {
                         LocalDate nascimento = LocalDate.parse(sc.nextLine());
                     
                         try {
-                            clienteController.cadastrarComFactory(nome, cpf, telefone, email, nascimento);
+                            clienteController.cadastrar(nome, cpf, telefone, email, nascimento);
                             System.out.println("Cliente adicionado com sucesso!");
                         } catch (Exception e) {
                             System.out.println("Erro ao adicionar cliente: " + e.getMessage());
@@ -355,7 +363,7 @@ public class LocadoraView {
                         sc.nextLine();
                     
                         try {
-                            funcionarioController.cadastrarComFactory(nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
+                            funcionarioController.cadastrar(nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
                             System.out.println("Funcionário adicionado com sucesso!");
                         } catch (Exception e) {
                             System.out.println("Erro ao adicionar funcionário: " + e.getMessage());
@@ -420,7 +428,12 @@ public class LocadoraView {
                         System.out.println("Nenhum aluguel ativo.");
                     } else {
                         System.out.println("--- Aluguéis Ativos ---");
-                        ativos.forEach(System.out::println);
+                        try {
+                          fsdfsfd  List<String> lista = a.listar();sdfsd
+                            lista.forEach(System.out::println);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                 }
                 case 2 -> {
@@ -433,13 +446,13 @@ public class LocadoraView {
                     }
                 }
                 case 3 -> {
-                    System.out.print("ID do cliente (deve estar cadastrado): ");
+                    System.out.print("ID do cliente: \n");
                     List<Cliente> clientes = clienteController.listarClientes();
                         if (clientes.isEmpty()) {
                             System.out.println("\nNenhum cliente cadastrado.");
                         } else {
                             for (Cliente c : clientes) {
-                                System.out.println("\n" + c);
+                                System.out.println(c);
                             }
                         }
                     int clienteId = sc.nextInt();
@@ -482,10 +495,10 @@ public class LocadoraView {
                         break;
                     }
                 
-                    System.out.print("ID do funcionário responsável: ");
-                    funcionarioController.listarFuncionarios().forEach(System.out::println);
+                    System.out.print("ID do funcionário responsável: \n");
                     int funcionarioId = sc.nextInt();
                     sc.nextLine();
+                    funcionarioController.listarFuncionarios().forEach(System.out::println);
                     Optional<Funcionario> funcionarioOpt = funcionarioController.buscarPorId(funcionarioId);
                     if (funcionarioOpt.isEmpty()) {
                         System.out.println("Funcionário não encontrado.");
@@ -579,10 +592,12 @@ public class LocadoraView {
                     } else {
                         System.out.println("--- Funcionários e suas remunerações ---");
                         for (Funcionario f : funcionarios) {
-                            aluguelController.exibirSalarioEComissao(f);
+                            String resultado = aluguelController.exibirSalarioEComissao(f);
+                            System.out.println(resultado);
                         }
                     }
                 }
+
                 case 0 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção inválida.");
             }

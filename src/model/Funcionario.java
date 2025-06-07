@@ -1,9 +1,8 @@
 package model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public final class Funcionario extends Pessoa implements Serializable{
+public final class Funcionario extends Pessoa{
     private Turno turno;
     private String cargo;
     private double salario, comissao;
@@ -18,7 +17,7 @@ public final class Funcionario extends Pessoa implements Serializable{
     }
 
     public double calcularComissao(double valorVenda) {
-        return valorVenda * (1 + comissao / 100.0);
+        return valorVenda * (comissao / 100.0);
     }
 
     public Turno getTurno() {
@@ -51,6 +50,6 @@ public final class Funcionario extends Pessoa implements Serializable{
 
     @Override
     public String toString() {
-        return "ID = " + getId() + " | " + getNome() + " - " + cargo + " (" + turno + ") - Salário R$" + String.format("%.2f", salario);
+        return "ID = " + getId() + " | " + getNome() + " - " + cargo + " (" + turno + ") - Salário R$" + String.format("%.2f", salario) + " - Comissão " + getComissao() + "%";
     }
 }

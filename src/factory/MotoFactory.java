@@ -7,6 +7,7 @@ public class MotoFactory {
 
     public static Moto criarMoto(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, String tipoCarenagem) throws Exception {
 
+        //checar aula -. aula 20 pt2
         if (marca == null || marca.isEmpty()) {
             throw new StringVaziaException("Marca não pode ser vazia");
         }

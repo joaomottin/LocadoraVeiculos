@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public final class Funcionario extends Pessoa{
     private Turno turno;
     private String cargo;
-    private double salario, comissao;
+    private double salario, comissao, comissaoAcumulada;
 
     public Funcionario(String nome, String cpf, String telefone, String email, LocalDate dataNascimento,
             Turno turno, String cargo, double salario, double comissao) {
@@ -46,6 +46,14 @@ public final class Funcionario extends Pessoa{
     }
     public void setComissao(double comissao) {
         this.comissao = comissao;
+    }
+
+    public double getComissaoAcumulada() {
+        return comissaoAcumulada;
+    }
+
+    public void setComissaoAcumulada(double comissaoAcumulada) {
+        this.comissaoAcumulada = comissaoAcumulada;
     }
 
     @Override

@@ -61,9 +61,6 @@
 
         @Override
         public List<String> listar() {
-            if (carros.isEmpty()) {
-                throw new IllegalArgumentException("Nenhum carro cadastrado.");
-            }
             return carros.stream().map(Carro::toString).toList();
         }
 

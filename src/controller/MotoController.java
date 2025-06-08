@@ -50,7 +50,7 @@ public class MotoController implements Gerenciavel{
     public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, String tipoCarenagem) throws Exception {
         Moto moto = MotoFactory.criarMoto(marca, modelo, anoFabricacao, placa, precoDiaria, disponivel, cilindradas, tipoCarenagem);
         cadastrar(moto);
-        Log.cadastrar("Moto cadastrado: " + moto.getMarca() + " " + moto.getModelo() + " (" + moto.getPlaca() + ")");
+        Log.cadastrar("Moto cadastrada: " + moto.getMarca() + " " + moto.getModelo() + " (" + moto.getPlaca() + ")");
     }
 
 

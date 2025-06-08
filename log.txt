@@ -1,4 +1,12 @@
-2025-06-06T21:28:56.589472700 - Motos carregadas: 2
-2025-06-06T21:28:56.638039400 - Carros carregados: 1
-2025-06-06T21:28:56.658042200 - Funcionarios carregados: 1
-2025-06-06T21:28:56.679050100 - Funcionarios carregados: 1
+2025-06-08T17:32:55.310276600 - Motos carregadas: 2
+2025-06-08T17:32:55.321302700 - Carros carregados: 1
+2025-06-08T17:32:55.325847700 - Clientes carregados: 1
+2025-06-08T17:32:55.329349800 - Funcionarios carregados: 2
+2025-06-08T17:33:52.484527300 - Moto cadastrada: BMW S1000RR (KDS0R49)
+2025-06-08T17:35:11.453599600 - Moto cadastrada: Harley Davidson Softail Fat Boy 114 (NRD0K49)
+2025-06-08T17:36:26.465969500 - Moto atualizada: Honda Biz (BEM4M04)
+2025-06-08T17:39:26.619611400 - Carro cadastrado: Honda Civic (BNR4L11)
+2025-06-08T17:39:52.554544900 - Carro cadastrado: Chevrolet Corolla (BEM8430)
+2025-06-08T17:40:44.711640600 - Carro alterado: Porsche Carrera (RIC0D69)
+2025-06-08T17:41:11.853624100 - Carro cadastrado: Teste Teste (TES7E69)
+2025-06-08T17:41:15.941357700 - Carro removida | ID = 10

@@ -1,9 +1,12 @@
 package controller;
 
+import model.Aluguel;
 import model.Funcionario;
 import model.Turno;
 import util.GeradorID;
 import util.Log;
+import dal.FuncionarioDAO;
+import factory.FuncionarioFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -11,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import dal.FuncionarioDAO;
-import factory.FuncionarioFactory;
 
 public class FuncionarioController {
     private List<Funcionario> funcionarios = new ArrayList<>();
@@ -51,7 +52,6 @@ public class FuncionarioController {
         return funcionario;
     }
 
-
     public List<Funcionario> listarFuncionarios() {
         return funcionarios;
     }
@@ -64,6 +64,22 @@ public class FuncionarioController {
         Optional<Funcionario> funcionarioOpt = buscarPorId(idFuncionario);
         return funcionarioOpt.map(f -> f.calcularComissao(valorVenda));
     }
+
+    public String exibirSalarioEComissao(int idFuncionario, List<Aluguel> alugueis) {
+        Optional<Funcionario> funcionarioOpt = buscarPorId(idFuncionario);
+        if (funcionarioOpt.isEmpty()) {
+            return "Funcionário não encontrado.";
+        }
+        Funcionario funcionario = funcionarioOpt.get();
+        double totalComissao = alugueis.stream()
+            .filter(a -> a.getFuncionario().getId() == funcionario.getId())
+            .mapToDouble(Aluguel::getComissaoFuncionario)
+            .sum();
+        double salarioTotal = funcionario.getSalario() + totalComissao;
+        return String.format("Funcionário: %s | Salário Base: R$ %.2f | Comissão total: R$ %.2f | Total: R$ %.2f",
+            funcionario.getNome(), funcionario.getSalario(), totalComissao, salarioTotal);
+    }   
+
 
     public boolean atualizarTurno(int idFuncionario, Turno novoTurno) {
         Optional<Funcionario> funcionarioOpt = buscarPorId(idFuncionario);

@@ -3,6 +3,8 @@ package controller;
 import model.Cliente;
 import util.GeradorID;
 import util.Log;
+import factory.ClienteFactory;
+import dal.ClienteDAO;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import dal.ClienteDAO;
-import factory.ClienteFactory;
 
 public class ClienteController {
     private List<Cliente> clientes = new ArrayList<>();
@@ -19,7 +19,7 @@ public class ClienteController {
     public ClienteController() {
         try {
             clientes = ClienteDAO.carregar();
-            Log.carregar("Funcionarios carregados: " + clientes.size());
+            Log.carregar("Clientes carregados: " + clientes.size());
             int maiorId = clientes.stream()
                               .mapToInt(Cliente::getId)
                               .max()
@@ -63,6 +63,7 @@ public class ClienteController {
         Optional<Cliente> clienteOpt = buscarPorId(clienteId);
         if (clienteOpt.isPresent()) {
             clienteOpt.get().aplicarMulta();
+            salvar();
             return true;
         }
         return false;
@@ -72,6 +73,7 @@ public class ClienteController {
         Optional<Cliente> clienteOpt = buscarPorId(clienteId);
         if (clienteOpt.isPresent()) {
             clienteOpt.get().removerMulta();
+            salvar();
             return true;
         }
         return false;

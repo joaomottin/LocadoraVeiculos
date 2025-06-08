@@ -25,7 +25,7 @@ public class LocadoraView {
             System.out.println("2. Gerenciar Carros");
             System.out.println("3. Gerenciar Clientes");
             System.out.println("4. Gerenciar Funcionários");
-            System.out.println("5. Alugar Veículo");
+            System.out.println("5. Locadora");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
@@ -58,8 +58,7 @@ public class LocadoraView {
                     case 1 -> {
                         System.out.println("\n--- Lista de Motos ---");
                         try {
-                            List<String> lista = motoController.listar();
-                            lista.forEach(System.out::println);
+                            motoController.listar().forEach(System.out::println);
                         } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                         }
@@ -93,6 +92,7 @@ public class LocadoraView {
                     }
                     case 3 -> { 
                         System.out.print("ID da moto a modificar: ");
+                        motoController.listar().forEach(System.out::println);
                         int idMod = sc.nextInt();
                         sc.nextLine();
                                         
@@ -130,6 +130,7 @@ public class LocadoraView {
 
                     case 4 -> {
                         System.out.print("ID da moto a remover: ");
+                        motoController.listar().forEach(System.out::println);
                         int idRem = sc.nextInt();
                         sc.nextLine();
                     
@@ -163,11 +164,11 @@ public class LocadoraView {
                 switch (opcao) {
                     case 1 -> {
                         System.out.println("\n--- Lista de Carros ---");
-                        try {
-                            List<String> lista = carroController.listar();
-                            lista.forEach(System.out::println);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(e.getMessage());
+                        List<String> carros = carroController.listar();
+                        if (carros.isEmpty()) {
+                            System.out.println("Nenhum carro.");
+                        } else {
+                            carros.forEach(System.out::println);
                         }
                     }
                     case 2 -> {
@@ -199,6 +200,7 @@ public class LocadoraView {
                     }
                     case 3 -> {
                         System.out.print("ID do carro a modificar: ");
+                        carroController.listar().forEach(System.out::println);
                         int idMod = sc.nextInt();
                         sc.nextLine();
 
@@ -235,6 +237,7 @@ public class LocadoraView {
                     }
                     case 4 -> {
                         System.out.print("ID do carro a remover: ");
+                        carroController.listar().forEach(System.out::println);
                         int idRem = sc.nextInt();
                         sc.nextLine();
                     
@@ -268,13 +271,12 @@ public class LocadoraView {
             
                 switch (opcao) {
                     case 1 -> {
+                        System.out.println("\n--- Lista de Clientes ---");
                         List<Cliente> clientes = clienteController.listarClientes();
                         if (clientes.isEmpty()) {
-                            System.out.println("Nenhum cliente cadastrado.");
+                            System.out.println("Nenhum cliente.");
                         } else {
-                            for (Cliente c : clientes) {
-                                System.out.println(c);
-                            }
+                            clientes.forEach(System.out::println);
                         }
                     }
                     case 2 -> {
@@ -338,7 +340,12 @@ public class LocadoraView {
                 switch (opcao) {
                     case 1 -> {
                         System.out.println("\n--- Lista de Funcionários ---");
-                        funcionarioController.listarFuncionarios().forEach(System.out::println);
+                        List<Funcionario> lista = funcionarioController.listarFuncionarios();
+                        if (lista.isEmpty()) {
+                            System.out.println("Nenhum funcionário cadastrado.");
+                        } else {
+                            lista.forEach(System.out::println);
+                        }
                     }
                     case 2 -> {
                         System.out.print("Nome: ");
@@ -427,13 +434,7 @@ public class LocadoraView {
                     if (ativos.isEmpty()) {
                         System.out.println("Nenhum aluguel ativo.");
                     } else {
-                        System.out.println("--- Aluguéis Ativos ---");
-                        try {
-                          fsdfsfd  List<String> lista = a.listar();sdfsd
-                            lista.forEach(System.out::println);
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(e.getMessage());
-                        }
+                        ativos.forEach(System.out::println);
                     }
                 }
                 case 2 -> {
@@ -469,7 +470,7 @@ public class LocadoraView {
                 
                     Veiculo veiculo = null;
                     if (tipoVeiculo.equals("moto")) {
-                        motoController.listar();
+                        motoController.listar().forEach(System.out::println);
                         System.out.print("ID da moto para alugar: ");
                         int motoId = sc.nextInt();
                         sc.nextLine();
@@ -480,7 +481,7 @@ public class LocadoraView {
                         }
                         veiculo = motoOpt.get();
                     } else if (tipoVeiculo.equals("carro")) {
-                        carroController.listar();
+                        carroController.listar().forEach(System.out::println);
                         System.out.print("ID do carro para alugar: ");
                         int carroId = sc.nextInt();
                         sc.nextLine();
@@ -496,9 +497,9 @@ public class LocadoraView {
                     }
                 
                     System.out.print("ID do funcionário responsável: \n");
+                    funcionarioController.listarFuncionarios().forEach(System.out::println);
                     int funcionarioId = sc.nextInt();
                     sc.nextLine();
-                    funcionarioController.listarFuncionarios().forEach(System.out::println);
                     Optional<Funcionario> funcionarioOpt = funcionarioController.buscarPorId(funcionarioId);
                     if (funcionarioOpt.isEmpty()) {
                         System.out.println("Funcionário não encontrado.");
@@ -592,12 +593,11 @@ public class LocadoraView {
                     } else {
                         System.out.println("--- Funcionários e suas remunerações ---");
                         for (Funcionario f : funcionarios) {
-                            String resultado = aluguelController.exibirSalarioEComissao(f);
+                            String resultado = funcionarioController.exibirSalarioEComissao(f.getId(), aluguelController.listarTodos());
                             System.out.println(resultado);
                         }
                     }
                 }
-
                 case 0 -> System.out.println("Voltando ao menu principal...");
                 default -> System.out.println("Opção inválida.");
             }

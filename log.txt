@@ -10,3 +10,7 @@
 2025-06-08T17:40:44.711640600 - Carro alterado: Porsche Carrera (RIC0D69)
 2025-06-08T17:41:11.853624100 - Carro cadastrado: Teste Teste (TES7E69)
 2025-06-08T17:41:15.941357700 - Carro removida | ID = 10
+2025-06-08T20:11:23.554407100 - Motos carregadas: 4
+2025-06-08T20:11:23.563499400 - Carros carregados: 3
+2025-06-08T20:11:23.567514900 - Clientes carregados: 2
+2025-06-08T20:11:23.571522400 - Funcionarios carregados: 2

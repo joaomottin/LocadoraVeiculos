@@ -5,7 +5,6 @@ import java.io.Serializable;
 import util.GeradorID;
 
 public abstract class Veiculo implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     private final int id;
     private String marca;

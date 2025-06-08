@@ -4,19 +4,20 @@ import dal.MotoDAO;
 import factory.MotoFactory;
 import model.Moto;
 import util.GeradorID;
+import util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MotoController implements Gerenciavel<Moto> {
+public class MotoController implements Gerenciavel{
     private List<Moto> motos;
 
     public MotoController() {
         try {
             motos = MotoDAO.carregar();
-            System.out.println("Motos carregadas: " + motos.size());
+            Log.carregar("Motos carregadas: " + motos.size());
             int maiorId = motos.stream()
                               .mapToInt(Moto::getId)
                               .max()
@@ -24,7 +25,7 @@ public class MotoController implements Gerenciavel<Moto> {
             GeradorID.setNextIdVeiculo(maiorId);
         } catch (IOException | ClassNotFoundException e) {
             motos = new ArrayList<>();
-            System.out.println("Arquivo motos.ser não encontrado ou corrompido.");
+            throw new IllegalArgumentException("Arquivo motos.ser não encontrado ou corrompido.");
         }
     }
 
@@ -36,7 +37,7 @@ public class MotoController implements Gerenciavel<Moto> {
         try {
             MotoDAO.salvar(motos);
         } catch (IOException e) {
-            System.out.println("Erro ao salvar motos: " + e.getMessage());
+            throw new IllegalArgumentException("Erro ao salvar motos: " + e.getMessage());
         }
     }
 
@@ -46,40 +47,27 @@ public class MotoController implements Gerenciavel<Moto> {
                     .findFirst();
     }
 
-    public void cadastrarComFactory(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, String tipoCarenagem) throws Exception {
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, String tipoCarenagem) throws Exception {
         Moto moto = MotoFactory.criarMoto(marca, modelo, anoFabricacao, placa, precoDiaria, disponivel, cilindradas, tipoCarenagem);
         cadastrar(moto);
+        Log.cadastrar("Moto cadastrado: " + moto.getMarca() + " " + moto.getModelo() + " (" + moto.getPlaca() + ")");
     }
 
 
-    @Override
     public void cadastrar(Moto moto) {
         motos.add(moto);
         salvar();
     }
 
     @Override
-    public void listar() {
+    public List<String> listar() {
         if (motos.isEmpty()) {
-            System.out.println("Nenhuma moto cadastrada.");
-            return;
+            throw new IllegalArgumentException("Nenhuma moto cadastrada.");
         }
-        motos.forEach(System.out::println);
+        return motos.stream().map(Moto::toString).toList();
     }
 
-    @Override
-    public void atualizar(int id, Moto motoAtualizada) {
-        buscarPorId(id).ifPresentOrElse(
-            motoExistente -> {
-                motos.set(motos.indexOf(motoExistente), motoAtualizada);
-                salvar();
-            },
-            () -> System.out.println("Moto não encontrada com ID: " + id)
-        );
-    }
-
-    public void atualizar(int id, String marca, String modelo, int anoFabricacao, String placa,
-                      double precoDiaria, int cilindradas, String tipoCarenagem) throws Exception {
+    public void atualizar(int id, String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, int cilindradas, String tipoCarenagem) throws Exception {
 
     Optional<Moto> optMoto = buscarPorId(id);
     if (optMoto.isEmpty()) {
@@ -98,12 +86,17 @@ public class MotoController implements Gerenciavel<Moto> {
     moto.setTipoCarenagem(tipoCarenagem);
 
     salvar();
-}
-
+        Log.cadastrar("Moto atualizada: " + moto.getMarca() + " " + moto.getModelo() + " (" + moto.getPlaca() + ")");
+    }
 
     @Override
     public void remover(int id) {
-        boolean removido = motos.removeIf(m -> m.getId() == id);
-        if (removido) salvar();
+        Optional<Moto> motoOptional = buscarPorId(id);
+        if (motoOptional.isPresent()) {
+            Moto moto = motoOptional.get();
+            motos.remove(moto);
+            salvar();
+            Log.excluir("Moto removida | ID = " + moto.getId());
+        }
     }
 }

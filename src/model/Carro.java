@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public final class Carro extends Veiculo implements Serializable{
+public final class Carro extends Veiculo{
     private static final long serialVersionUID = 1L;
     private int numeroPortas;
     private String tipoCombustivel;

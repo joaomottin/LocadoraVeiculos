@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public final class Moto extends Veiculo implements Serializable{
+public final class Moto extends Veiculo{
     private int cilindradas;
     private String tipoCarenagem;
 

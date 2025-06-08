@@ -1,9 +1,9 @@
 package controller;
 
-import model.Carro;
 import model.Funcionario;
 import model.Turno;
 import util.GeradorID;
+import util.Log;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,15 +20,15 @@ public class FuncionarioController {
     public FuncionarioController() {
         try {
             funcionarios = FuncionarioDAO.carregar();
-            System.out.println("Funcionarios carregados: " + funcionarios.size());
+            Log.carregar("Funcionarios carregados: " + funcionarios.size());
             int maiorId = funcionarios.stream()
-                              .mapToInt(Funcionario::getId)
-                              .max()
-                              .orElse(0);
+                                      .mapToInt(Funcionario::getId)
+                                      .max()
+                                      .orElse(0);
             GeradorID.setNextIdPessoa(maiorId);
         } catch (IOException | ClassNotFoundException e) {
             funcionarios = new ArrayList<>();
-            System.out.println("Arquivo funcionarios.ser não encontrado ou corrompido.");
+            throw new IllegalArgumentException("Arquivo funcionarios.ser não encontrado ou corrompido.");
         }
     }
 
@@ -40,11 +40,11 @@ public class FuncionarioController {
         try {
             FuncionarioDAO.salvar(funcionarios);
         } catch (IOException e) {
-            System.out.println("Erro ao salvar funcionarios: " + e.getMessage());
+            throw new IllegalArgumentException("Erro ao salvar funcionarios: " + e.getMessage());
         }
     }
 
-    public Funcionario cadastrarComFactory(String nome, String cpf, String telefone, String email, LocalDate dataNascimento, Turno turno, String cargo, double salario, double comissao) throws Exception {
+    public Funcionario cadastrar(String nome, String cpf, String telefone, String email, LocalDate dataNascimento, Turno turno, String cargo, double salario, double comissao) throws Exception {
         Funcionario funcionario = FuncionarioFactory.criarFuncionario(nome, cpf, telefone, email, dataNascimento, turno, cargo, salario, comissao);
         funcionarios.add(funcionario);
         salvar();

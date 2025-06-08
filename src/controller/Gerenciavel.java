@@ -1,8 +1,8 @@
 package controller;
 
-public interface Gerenciavel<T> {
-    void cadastrar(T obj);
-    void listar();
-    void atualizar(int id, T obj);
+import java.util.List;
+
+public interface Gerenciavel {
+    List<String> listar();
     void remover(int id);
 }  

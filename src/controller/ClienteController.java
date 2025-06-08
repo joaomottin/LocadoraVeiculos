@@ -1,9 +1,8 @@
 package controller;
 
 import model.Cliente;
-import model.Funcionario;
-import model.Veiculo;
 import util.GeradorID;
+import util.Log;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,7 +19,7 @@ public class ClienteController {
     public ClienteController() {
         try {
             clientes = ClienteDAO.carregar();
-            System.out.println("Funcionarios carregados: " + clientes.size());
+            Log.carregar("Funcionarios carregados: " + clientes.size());
             int maiorId = clientes.stream()
                               .mapToInt(Cliente::getId)
                               .max()
@@ -28,7 +27,7 @@ public class ClienteController {
             GeradorID.setNextIdPessoa(maiorId);
         } catch (IOException | ClassNotFoundException e) {
             clientes = new ArrayList<>();
-            System.out.println("Arquivo clientes.ser não encontrado ou corrompido.");
+            throw new IllegalArgumentException("Arquivo clientes.ser não encontrado ou corrompido.");
         }
     }
 
@@ -40,11 +39,11 @@ public class ClienteController {
         try {
             ClienteDAO.salvar(clientes);
         } catch (IOException e) {
-            System.out.println("Erro ao salvar clientes: " + e.getMessage());
+            throw new IllegalArgumentException("Erro ao salvar clientes: " + e.getMessage());
         }
     }
 
-    public Cliente cadastrarComFactory(String nome, String cpf, String telefone, String email, LocalDate dataNascimento) throws Exception {
+    public Cliente cadastrar(String nome, String cpf, String telefone, String email, LocalDate dataNascimento) throws Exception {
         Cliente cliente = ClienteFactory.criarCliente(nome, cpf, telefone, email, dataNascimento);
         clientes.add(cliente);
         salvar();

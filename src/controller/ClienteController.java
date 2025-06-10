@@ -35,7 +35,7 @@ public class ClienteController {
         return ClienteDAO.carregar();
     }
 
-    private void salvar() {
+    public void salvar() {
         try {
             ClienteDAO.salvar(clientes);
         } catch (IOException e) {
@@ -49,7 +49,6 @@ public class ClienteController {
         salvar();
         return cliente;
     }
-
 
     public List<Cliente> listarClientes() {
         return clientes;

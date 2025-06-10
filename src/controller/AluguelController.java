@@ -8,7 +8,7 @@ import model.Veiculo;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,8 +55,14 @@ public class AluguelController implements Gerenciavel {
     public boolean alugarVeiculo(Cliente cliente, Veiculo veiculo, Funcionario funcionario, LocalDate inicio, LocalDate fim) {
         if (!veiculo.isDisponivel() || clienteTemAluguelAtivo(cliente)) return false;
 
-        long dias = ChronoUnit.DAYS.between(inicio, fim);
+        Period periodo = Period.between(inicio, fim);
+        int dias = periodo.getDays() + (periodo.getMonths() * 30) + (periodo.getYears() * 365);
+
         double valor = dias * veiculo.getPrecoDiaria();
+
+        if (cliente.isPossuiMulta()) {
+        valor *= 1.10;
+        }
 
         Aluguel aluguel = new Aluguel(++ultimoId, cliente, veiculo, inicio, fim, valor, funcionario);
         alugueis.add(aluguel);

@@ -17,7 +17,6 @@ public final class Carro extends Veiculo{
     public void setNumeroPortas(int numeroPortas) {
         this.numeroPortas = numeroPortas;
     }
-
     public String getTipoCombustivel() {
         return tipoCombustivel; 
     }
@@ -29,7 +28,6 @@ public final class Carro extends Veiculo{
     public String tipoVeiculo() {
         return "Carro";
     }
-
     @Override
     public String toString() {
         return "ID: " + getId() + " - Marca: " + getMarca() + " - Modelo: " + getModelo() + " - Ano: " + getAnoFabricacao() + " - Placa: " + getPlaca() + " - Preço/Diária: R$" + getPrecoDiaria() + " - Disponível: " + (isDisponivel() ? "Sim" : "Não") + " - Portas: " + numeroPortas + " - Combustível: " + tipoCombustivel;

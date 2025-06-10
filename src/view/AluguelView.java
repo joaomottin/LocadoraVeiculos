@@ -1,7 +1,7 @@
 package view;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -69,15 +69,15 @@ public class AluguelView {
                     }
                 }
                 case 3 -> {
-                    System.out.print("ID do cliente: \n");
                     List<Cliente> clientes = clienteController.listarClientes();
-                        if (clientes.isEmpty()) {
-                            System.out.println("\nNenhum cliente cadastrado.");
-                        } else {
-                            for (Cliente c : clientes) {
-                                System.out.println(c);
-                            }
+                    if (clientes.isEmpty()) {
+                        System.out.println("\nNenhum cliente cadastrado.");
+                    } else {
+                        for (Cliente c : clientes) {
+                            System.out.println(c);
                         }
+                    }
+                    System.out.print("\nID do cliente: ");
                     int clienteId = sc.nextInt();
                     sc.nextLine();
                     Optional<Cliente> clienteOpt = clienteController.buscarPorId(clienteId);
@@ -93,7 +93,7 @@ public class AluguelView {
                     Veiculo veiculo = null;
                     if (tipoVeiculo.equals("moto")) {
                         motoController.listar().forEach(System.out::println);
-                        System.out.print("ID da moto para alugar: ");
+                        System.out.print("\nID da moto para alugar: ");
                         int motoId = sc.nextInt();
                         sc.nextLine();
                         Optional<Moto> motoOpt = motoController.buscarPorId(motoId);
@@ -104,7 +104,7 @@ public class AluguelView {
                         veiculo = motoOpt.get();
                     } else if (tipoVeiculo.equals("carro")) {
                         carroController.listar().forEach(System.out::println);
-                        System.out.print("ID do carro para alugar: ");
+                        System.out.print("\nID do carro para alugar: ");
                         int carroId = sc.nextInt();
                         sc.nextLine();
                         Optional<Carro> carroOpt = carroController.buscarPorId(carroId);
@@ -118,8 +118,8 @@ public class AluguelView {
                         break;
                     }
                 
-                    System.out.print("ID do funcionário responsável: \n");
                     funcionarioController.listarFuncionarios().forEach(System.out::println);
+                    System.out.print("\nID do funcionário responsável: \n");
                     int funcionarioId = sc.nextInt();
                     sc.nextLine();
                     Optional<Funcionario> funcionarioOpt = funcionarioController.buscarPorId(funcionarioId);
@@ -136,7 +136,8 @@ public class AluguelView {
                 
                     boolean sucesso = aluguelController.alugarVeiculo(cliente, veiculo, funcionario, dataInicio, dataFim);
                     if (sucesso) {
-                        System.out.println("Aluguel cadastrado com sucesso!");
+                        clienteController.salvar();
+                        System.out.println("\nAluguel cadastrado com sucesso!");
                     } else {
                         System.out.println("Falha ao cadastrar aluguel (veículo pode estar indisponível).");
                     }
@@ -191,14 +192,13 @@ public class AluguelView {
                     }
                 
                     aluguel.getVeiculo().setDisponivel(true);
-                
                     aluguel.setVeiculo(novoVeiculo);
                     novoVeiculo.setDisponivel(false);
                 
-                    long dias = ChronoUnit.DAYS.between(aluguel.getDataInicio(), aluguel.getDataFim());
+                    Period periodo = Period.between(aluguel.getDataInicio(), aluguel.getDataFim());
+                    int dias = periodo.getDays() + (periodo.getMonths() * 30) + (periodo.getYears() * 365);
                     double novoValor = dias * novoVeiculo.getPrecoDiaria();
                     aluguel.setValorTotal(novoValor);
-                
                     System.out.println("Aluguel atualizado com novo veículo com sucesso!");
                 }
                 case 5 -> {

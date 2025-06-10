@@ -16,7 +16,6 @@ public final class Moto extends Veiculo{
     public void setCilindradas(int cilindradas) { 
         this.cilindradas = cilindradas; 
     }
-
     public String getTipoCarenagem() {
         return tipoCarenagem; 
     }
@@ -27,8 +26,7 @@ public final class Moto extends Veiculo{
     @Override
     public String tipoVeiculo() {
         return "Moto";
-    }
-
+    } 
     @Override
     public String toString() {
         return super.toString() + " - Cilindradas: " + cilindradas + "cc - Tipo de carenagem: " + tipoCarenagem;

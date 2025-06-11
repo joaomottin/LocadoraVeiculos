@@ -31,47 +31,61 @@ public class Aluguel implements Serializable {
     public int getId() {
         return id;
     }
+    
     public Cliente getCliente() {
         return cliente;
     }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
     public Veiculo getVeiculo() {
         return veiculo;
     }
+
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
+
     public Funcionario getFuncionario() {
         return funcionario;
     }
+
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
         atualizarComissao();
     }
+
     public LocalDate getDataInicio() {
         return dataInicio;
     }
+
     public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
+
     public LocalDate getDataFim() {
         return dataFim;
     }
+
     public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
+
     public double getValorTotal() {
         return valorTotal;
     }
+
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
         atualizarComissao();
     }
+
     public double getComissaoFuncionario() {
         return comissaoFuncionario;
     }
+
     private void atualizarComissao() {
         if (funcionario != null) {
             this.comissaoFuncionario = funcionario.calcularComissao(this.valorTotal);

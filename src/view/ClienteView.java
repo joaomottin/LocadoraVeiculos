@@ -1,6 +1,7 @@
 package view;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class ClienteView {
     }     
 
     public void menu() {
-            int opcao;
+            int opcao = -1;
             do {
                 System.out.println("\n--- Menu Clientes ---");
                 System.out.println("1. Listar clientes");
@@ -26,8 +27,15 @@ public class ClienteView {
                 System.out.println("4. Remover multa");
                 System.out.println("0. Voltar");
                 System.out.print("Escolha uma opção: ");
-                opcao = sc.nextInt();
-                sc.nextLine();
+                
+                try {
+                    opcao = sc.nextInt();
+                    sc.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida! Por favor, digite um número inteiro.");
+                    sc.nextLine();
+                    opcao = -1;
+                }
             
                 switch (opcao) {
                     case 1 -> {

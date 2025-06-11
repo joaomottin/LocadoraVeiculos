@@ -1,8 +1,10 @@
 package view;
 
 import controller.MotoController;
+import model.Carenagem;
 import model.Moto;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class MotoView {
     }        
     
     public void menu() {
-            int opcao;
+            int opcao = -1;
             do {
                 System.out.println("\n--- Menu Motos ---");
                 System.out.println("1. Listar motos");
@@ -25,8 +27,15 @@ public class MotoView {
                 System.out.println("4. Remover moto");
                 System.out.println("0. Voltar");
                 System.out.print("Escolha uma opção: ");
-                opcao = sc.nextInt();
-                sc.nextLine();
+
+                try {
+                    opcao = sc.nextInt();
+                    sc.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida! Por favor, digite um número inteiro.");
+                    sc.nextLine();
+                    opcao = -1;
+                }
             
                 switch (opcao) {
                     case 1 -> {
@@ -53,11 +62,19 @@ public class MotoView {
                         System.out.print("Cilindradas: ");
                         int cilindradas = sc.nextInt();
                         sc.nextLine();
-                        System.out.print("Tipo de carenagem: ");
-                        String tipoCarenagem = sc.nextLine();
+                        Carenagem carenagem = null;
+                            while (carenagem == null) {
+                                System.out.print("Tipo de carenagem (Esportiva, Custom, Naked, Trail, Scooter): ");
+                                String input = sc.nextLine().toUpperCase();
+                                try {
+                                    carenagem = Carenagem.valueOf(input);
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("Tipo de carenagem inválido! Tente novamente.");
+                                }
+                            }
                     
                         try {
-                            motoController.cadastrar(marca, modelo, ano, placa, preco, true, cilindradas, tipoCarenagem);
+                            motoController.cadastrar(marca, modelo, ano, placa, preco, true, cilindradas, carenagem);
                             System.out.println("Moto adicionada com sucesso!");
                         } catch (Exception e) {
                             System.out.println("Erro(s) ao adicionar moto: " + e.getMessage());
@@ -90,8 +107,17 @@ public class MotoView {
                                 System.out.print("Novas cilindradas: ");
                                 int cilindradasAtualizado = sc.nextInt();
                                 sc.nextLine();
-                                System.out.print("Novo tipo de carenagem: ");
-                                String carenagemAtualizada = sc.nextLine();
+                                Carenagem carenagemAtualizada = null;
+                                while (carenagemAtualizada == null) {
+                                    System.out.print("Novo tipo de carenagem (Esportiva, Custom, Naked, Trail, Scooter): ");
+                                    String entrada = sc.nextLine().toUpperCase();
+                                    try {
+                                        carenagemAtualizada = Carenagem.valueOf(entrada);
+                                    } catch (IllegalArgumentException e) {
+                                        System.out.println("Tipo de carenagem inválido! Digite um dos valores: " + java.util.Arrays.toString(Carenagem.values()));
+                                        System.out.print("Tente novamente: ");
+                                    }
+                                }
                             
                                 motoController.atualizar(idMod, marcaAtualizada, modeloAtualizado, anoAtualizado, placaAtualizada, precoAtualizado, cilindradasAtualizado, carenagemAtualizada);
                             

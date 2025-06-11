@@ -1,11 +1,10 @@
-
-2025-06-10T23:14:03.880962100 - Moto cadastrada: Kawasaki Ninja (NFS0R34)
-2025-06-10T23:14:29.888719700 - Moto cadastrada: Yamaha R15 (NAE0E13)
-2025-06-10T23:14:55.792259500 - Moto cadastrada: Honda CG160 (MSE0435)
-2025-06-10T23:15:29.258723900 - Carro cadastrado: BMW 320I (NFD3942)
-2025-06-10T23:16:31.943391100 - Carro cadastrado: Jeep Renegade (NPE2K94)
-2025-06-10T23:17:03.877141900 - Carro cadastrado: Porsche Carrera (RIC0D55)
-2025-06-10T23:28:47.684851100 - Motos carregadas: 3
-2025-06-10T23:28:47.694093100 - Carros carregados: 3
-2025-06-10T23:28:47.699092900 - Clientes carregados: 3
-2025-06-10T23:28:47.703124 - Funcionarios carregados: 3
+2025-06-11T20:35:58.366142800 - Moto cadastrada: Kawasaki Ninja (NEA3R11)
+2025-06-11T20:36:23.531554200 - Moto cadastrada: Yamaha R15 (BEM1E55)
+2025-06-11T20:37:23.262567100 - Moto cadastrada: Honda Biz (BIZ3F00)
+2025-06-11T20:39:51.939879400 - Carro cadastrado: BMW 320I (FOD9M12)
+2025-06-11T20:41:57.188272600 - Carro cadastrado: Porsche Carrera (GAP5M20)
+2025-06-11T20:42:49.841621900 - Carro cadastrado: Fiat Uno (HWN4Q40)
+2025-06-11T20:48:06.596822200 - Motos carregadas: 3
+2025-06-11T20:48:06.621451 - Carros carregados: 3
+2025-06-11T20:48:06.640721500 - Clientes carregados: 3
+2025-06-11T20:48:06.654038200 - Funcionarios carregados: 3

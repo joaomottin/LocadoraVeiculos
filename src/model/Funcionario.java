@@ -19,33 +19,42 @@ public final class Funcionario extends Pessoa{
     public double calcularComissao(double valorVenda) {
         return valorVenda * (comissao / 100.0);
     }
+
     public Turno getTurno() {
         return turno;
     }
+
     public void setTurno(Turno turno) {
         this.turno = turno;
     }
+
     public String getCargo() {
         return cargo;
     }
+
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
     public double getSalario() {
         return salario;
     }
+
     public void setSalario(double salario) {
         this.salario = salario;
     }
     public double getComissao() {
         return comissao;
     }
+
     public void setComissao(double comissao) {
         this.comissao = comissao;
     }
+
     public double getComissaoAcumulada() {
         return comissaoAcumulada;
     }
+    
     public void setComissaoAcumulada(double comissaoAcumulada) {
         this.comissaoAcumulada = comissaoAcumulada;
     }

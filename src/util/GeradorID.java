@@ -13,6 +13,7 @@ public class GeradorID {
             nextIdPessoa = id + 1;
         }
     }
+    
     public static int getNextIdVeiculo() {
         return nextIdVeiculo++;
     }

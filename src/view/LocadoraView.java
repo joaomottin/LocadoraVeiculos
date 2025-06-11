@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import controller.AluguelController;
@@ -9,21 +10,21 @@ import controller.FuncionarioController;
 import controller.MotoController;
 
 public class LocadoraView {
-    private static final Scanner sc = new Scanner(System.in);
-    private static final MotoController motoController = new MotoController();
-    private static final CarroController carroController = new CarroController();
-    private static final ClienteController clienteController = new ClienteController();
-    private static final FuncionarioController funcionarioController = new FuncionarioController();
-    private static final AluguelController aluguelController = new AluguelController();
+    private static Scanner sc = new Scanner(System.in);
+    private static MotoController motoController = new MotoController();
+    private static CarroController carroController = new CarroController();
+    private static ClienteController clienteController = new ClienteController();
+    private static FuncionarioController funcionarioController = new FuncionarioController();
+    private static AluguelController aluguelController = new AluguelController();
 
-    private static final MotoView motoView = new MotoView(motoController, sc);
-    private static final CarroView carroView = new CarroView(carroController, sc);
-    private static final ClienteView clienteView = new ClienteView(clienteController, sc);
-    private static final FuncionarioView funcionarioView = new FuncionarioView(funcionarioController, sc);
-    private static final AluguelView aluguelView = new AluguelView(aluguelController,clienteController,motoController,carroController,funcionarioController, sc);
+    private static MotoView motoView = new MotoView(motoController, sc);
+    private static CarroView carroView = new CarroView(carroController, sc);
+    private static ClienteView clienteView = new ClienteView(clienteController, sc);
+    private static FuncionarioView funcionarioView = new FuncionarioView(funcionarioController, sc);
+    private static AluguelView aluguelView = new AluguelView(aluguelController,clienteController,motoController,carroController,funcionarioController, sc);
 
     public static void main(String[] args) {
-        int opcao;
+        int opcao = -1;
         do {
             System.out.println("\n====== LOCADORA DE VEÍCULOS ======");
             System.out.println("1. Gerenciar Motos");
@@ -33,8 +34,15 @@ public class LocadoraView {
             System.out.println("5. Gerenciar Aluguéis");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
-            opcao = sc.nextInt();
-            sc.nextLine();
+
+            try {
+                    opcao = sc.nextInt();
+                    sc.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida! Por favor, digite um número inteiro.");
+                    sc.nextLine();
+                    opcao = -1;
+                }
 
             switch (opcao) {
                 case 1 -> motoView.menu();

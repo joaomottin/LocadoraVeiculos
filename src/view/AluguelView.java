@@ -2,6 +2,7 @@ package view;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -36,7 +37,7 @@ public class AluguelView {
     }
 
     public void menu() {
-        int opcao;
+        int opcao = -1;
         do {
             System.out.println("\n--- Menu Aluguel ---");
             System.out.println("1. Mostrar aluguéis ativos");
@@ -47,8 +48,15 @@ public class AluguelView {
             System.out.println("6. Mostrar salário e comissão dos funcionários");
             System.out.println("0. Voltar");
             System.out.print("Escolha uma opção: ");
-            opcao = sc.nextInt();
-            sc.nextLine();
+
+            try {
+                    opcao = sc.nextInt();
+                    sc.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida! Por favor, digite um número inteiro.");
+                    sc.nextLine();
+                    opcao = -1;
+                }
         
             switch (opcao) {
                 case 1 -> {

@@ -35,6 +35,21 @@ public class Validacao {
         }
     }
 
+    public static class PlacaInvalidaException extends RuntimeException {
+        public PlacaInvalidaException(String msg) {
+            super(msg);
+        }
+    }
+
+    public static void validarPlacaVeicular(String placa, String nomeCampo) {
+        validarStringVazia(placa, nomeCampo);
+        String padraoPlacaMercosul = "^[A-Z]{3}[0-9][A-Z][0-9]{2}$";
+        if (!placa.toUpperCase().matches(padraoPlacaMercosul)) {
+            throw new PlacaInvalidaException(nomeCampo + " deve seguir o formato AAA1A23.");
+        }
+    }
+
+
     public static void validarNumeroPositivo(double valor, String nomeCampo) {
         if (valor < 0) {
             throw new NumeroInvalidoException(nomeCampo + " deve ser positivo.");

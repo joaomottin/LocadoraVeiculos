@@ -1,5 +1,6 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -17,7 +18,7 @@ public class CarroView {
     }
     
     public void menu() {
-            int opcao;
+            int opcao = -1;
             do {
                 System.out.println("\n--- Menu Carros ---");
                 System.out.println("1. Listar carros");
@@ -26,8 +27,15 @@ public class CarroView {
                 System.out.println("4. Remover carro");
                 System.out.println("0. Voltar");
                 System.out.print("Escolha uma opção: ");
-                opcao = sc.nextInt();
-                sc.nextLine();
+
+                try {
+                    opcao = sc.nextInt();
+                    sc.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida! Por favor, digite um número inteiro.");
+                    sc.nextLine();
+                    opcao = -1;
+                }
             
                 switch (opcao) {
                     case 1 -> {

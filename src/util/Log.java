@@ -13,6 +13,7 @@ public class Log {
             System.out.println("Erro ao gravar no log: " + e.getMessage());
         }
     }
+
     public static void alterar(String mensagem) {
         try (FileWriter writer = new FileWriter ("log.txt",true)) {
             writer.write(LocalDateTime.now() + " - " + mensagem + "\n");
@@ -20,6 +21,7 @@ public class Log {
             System.out.println("Erro ao gravar no log: " + e.getMessage());
         }
     }
+
     public static void excluir(String mensagem) {
         try (FileWriter writer = new FileWriter ("log.txt",true)) {
             writer.write(LocalDateTime.now() + " - " + mensagem + "\n");
@@ -27,6 +29,7 @@ public class Log {
             System.out.println("Erro ao gravar no log: " + e.getMessage());
         }
     }
+    
     public static void carregar(String mensagem){
         try (FileWriter writer = new FileWriter ("log.txt",true)) {
             writer.write(LocalDateTime.now() + " - " + mensagem + "\n");

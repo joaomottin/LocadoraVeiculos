@@ -2,6 +2,7 @@ package controller;
 
 import dal.MotoDAO;
 import factory.MotoFactory;
+import model.Carenagem;
 import model.Moto;
 import util.GeradorID;
 import util.Log;
@@ -47,7 +48,7 @@ public class MotoController implements Gerenciavel{
                     .findFirst();
     }
 
-    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, String tipoCarenagem) throws Exception {
+    public void cadastrar(String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, boolean disponivel, int cilindradas, Carenagem tipoCarenagem) throws Exception {
         Moto moto = MotoFactory.criarMoto(marca, modelo, anoFabricacao, placa, precoDiaria, disponivel, cilindradas, tipoCarenagem);
         cadastrar(moto);
         Log.cadastrar("Moto cadastrada: " + moto.getMarca() + " " + moto.getModelo() + " (" + moto.getPlaca() + ")");
@@ -67,7 +68,7 @@ public class MotoController implements Gerenciavel{
         return motos.stream().map(Moto::toString).toList();
     }
 
-    public void atualizar(int id, String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, int cilindradas, String tipoCarenagem) throws Exception {
+    public void atualizar(int id, String marca, String modelo, int anoFabricacao, String placa, double precoDiaria, int cilindradas, Carenagem tipoCarenagem) throws Exception {
 
     Optional<Moto> optMoto = buscarPorId(id);
     if (optMoto.isEmpty()) {

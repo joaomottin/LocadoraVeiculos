@@ -1,6 +1,7 @@
 package view;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class FuncionarioView {
     }  
 
     public void menu() {
-            int opcao;
+            int opcao = -1;
             do {
                 System.out.println("\n--- Menu Funcionários ---");
                 System.out.println("1. Listar funcionários");
@@ -27,8 +28,15 @@ public class FuncionarioView {
                 System.out.println("4. Atualizar salário");
                 System.out.println("0. Voltar");
                 System.out.print("Escolha uma opção: ");
-                opcao = sc.nextInt();
-                sc.nextLine();
+
+                try {
+                    opcao = sc.nextInt();
+                    sc.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Entrada inválida! Por favor, digite um número inteiro.");
+                    sc.nextLine();
+                    opcao = -1;
+                }
             
                 switch (opcao) {
                     case 1 -> {
@@ -52,8 +60,16 @@ public class FuncionarioView {
                         System.out.print("Data de nascimento (yyyy-mm-dd): ");
                         String dataNascStr = sc.nextLine();
                         LocalDate dataNascimento = LocalDate.parse(dataNascStr);
-                        System.out.print("Turno (MANHA, TARDE, NOITE): ");
-                        Turno turno = Turno.valueOf(sc.nextLine().toUpperCase());
+                        Turno turno = null;
+                            while (turno == null) {
+                                System.out.print("Turno (Manha, Tarde, Noite): ");
+                                String inputTurno = sc.nextLine().toUpperCase();
+                                try {
+                                    turno = Turno.valueOf(inputTurno);
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("Turno inválido! Tente novamente.");
+                                }
+                            }
                         System.out.print("Cargo: ");
                         String cargo = sc.nextLine();
                         System.out.print("Salário: ");
@@ -73,9 +89,17 @@ public class FuncionarioView {
                         System.out.print("ID do funcionário para atualizar turno: ");
                         int idTurno = sc.nextInt();
                         sc.nextLine();
-                        System.out.print("Novo turno (MANHA, TARDE, NOITE): ");
-                        Turno novoTurno = Turno.valueOf(sc.nextLine().toUpperCase());
-                    
+                        Turno novoTurno = null;
+                            while (novoTurno == null) {
+                                System.out.print("Novo turno (Manha, Tarde, Noite): ");
+                                String inputTurno = sc.nextLine().toUpperCase();
+                                try {
+                                    novoTurno = Turno.valueOf(inputTurno);
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("Turno inválido! Tente novamente.");
+                                }
+                            }
+
                         if (funcionarioController.atualizarTurno(idTurno, novoTurno)) {
                             System.out.println("Turno atualizado com sucesso!");
                         } else {

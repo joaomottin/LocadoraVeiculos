@@ -10,6 +10,7 @@ public enum Turno {
     Turno(String horario) {
         this.horario = horario;
     }
+    
     public String getHorario() {
         return horario;
     }

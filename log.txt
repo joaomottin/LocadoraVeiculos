@@ -10,3 +10,29 @@
 2025-06-08T17:40:44.711640600 - Carro alterado: Porsche Carrera (RIC0D69)
 2025-06-08T17:41:11.853624100 - Carro cadastrado: Teste Teste (TES7E69)
 2025-06-08T17:41:15.941357700 - Carro removida | ID = 10
+2025-06-10T23:09:24.194395400 - Motos carregadas: 4
+2025-06-10T23:09:24.202901200 - Carros carregados: 3
+2025-06-10T23:09:24.207924400 - Clientes carregados: 2
+2025-06-10T23:09:24.211928800 - Funcionarios carregados: 2
+2025-06-10T23:11:02.160254 - Motos carregadas: 4
+2025-06-10T23:11:02.169362300 - Carros carregados: 3
+2025-06-10T23:11:02.170364100 - Clientes carregados: 0
+2025-06-10T23:11:02.175871900 - Funcionarios carregados: 2
+2025-06-10T23:13:16.412330100 - Motos carregadas: 4
+2025-06-10T23:13:16.421278800 - Carros carregados: 3
+2025-06-10T23:13:16.422284 - Clientes carregados: 0
+2025-06-10T23:13:16.424291400 - Funcionarios carregados: 0
+2025-06-10T23:13:33.700553200 - Motos carregadas: 0
+2025-06-10T23:13:33.708167300 - Carros carregados: 0
+2025-06-10T23:13:33.710166300 - Clientes carregados: 0
+2025-06-10T23:13:33.711980100 - Funcionarios carregados: 0
+2025-06-10T23:14:03.880962100 - Moto cadastrada: Kawasaki Ninja (NFS0R34)
+2025-06-10T23:14:29.888719700 - Moto cadastrada: Yamaha R15 (NAE0E13)
+2025-06-10T23:14:55.792259500 - Moto cadastrada: Honda CG160 (MSE0435)
+2025-06-10T23:15:29.258723900 - Carro cadastrado: BMW 320I (NFD3942)
+2025-06-10T23:16:31.943391100 - Carro cadastrado: Jeep Renegade (NPE2K94)
+2025-06-10T23:17:03.877141900 - Carro cadastrado: Porsche Carrera (RIC0D55)
+2025-06-10T23:24:34.989653400 - Motos carregadas: 3
+2025-06-10T23:24:34.998749600 - Carros carregados: 3
+2025-06-10T23:24:35.003751 - Clientes carregados: 3
+2025-06-10T23:24:35.004749400 - Funcionarios carregados: 0

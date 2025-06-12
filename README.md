@@ -14,8 +14,8 @@
 
 - [✨ Funcionalidades](#-funcionalidades)  
 - [🛠️ Tecnologias](#️-tecnologias)  
-- [🚀 Como Executar](#-como-executar)  
 - [🤝 Contribuição](#-contribuição)  
+- [🚀 Como Executar](#-como-executar)  
 ---
 
 ## ✨ Funcionalidades
@@ -47,13 +47,26 @@
 
 ---
 
-## 🚀 Como Usar
+## 👨‍💻 Como rodar o projeto
 
-Basta clonar o repositório e executar:
+### Pré-requisitos
+
+- [Java JDK 17+](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- Extensão Java instalada no VS Code:  
+  👉 `Extension Pack for Java`
+
+### Passo a passo
 
 ```bash
+# 1. Clone o repositório
 git clone https://github.com/joaomottin/LocadoraVeiculos.git
-cd LocadoraVeiculos
-javac -d bin src/App.java
-java -cp bin App
 
+# 2. Acesse a pasta do projeto
+cd LocadoraVeiculos
+
+#3. Agora abra a pasta no VS Code e vá até o arquivo src/App.java
+
+#4. Clique no botão ▶️ Run (ou botão direito > "Run Java")
+
+✅ Pronto! A aplicação será iniciada no terminal.
